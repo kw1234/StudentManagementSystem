@@ -131,3 +131,27 @@
     </tbody>
   </table>
 </div>
+
+
+<div style="position: relative; min-height: 200px;">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="position: relative; max-height: 400px; overflow: auto;">
+    <ng-container matColumnDef="guid">
+      <mat-header-cell *matHeaderCellDef> Guid </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.guid}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="first">
+      <mat-header-cell *matHeaderCellDef> First </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.first}} </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="colNames"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: colNames;"></mat-row>
+  </mat-table>
+  
+</div>
