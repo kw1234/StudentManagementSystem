@@ -74,10 +74,7 @@
 
     <ng-container matColumnDef="gradeColor">
       <mat-header-cell *matHeaderCellDef> Grade Color </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-	<mat-form-field>
-          <input matInput placeholder="" [(ngModel)]=row.gradeColor>
-        </mat-form-field>
+      <mat-cell *matCellDef="let row" style="background-color:{{row.gradeColor}}">
       </mat-cell>
     </ng-container>
 
@@ -85,7 +82,13 @@
       <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
       <mat-cell *matCellDef="let row">
 	<mat-form-field>
-          <input matInput placeholder="" [(ngModel)]=row.comments>
+          <mat-label>Comments</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+		    [(ngModel)]=row.comments></textarea>
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -94,8 +97,14 @@
       <mat-header-cell *matHeaderCellDef> To Do </mat-header-cell>
       <mat-cell *matCellDef="let row">
 	<mat-form-field>
-          <input matInput placeholder="" [(ngModel)]=row.todo>
-        </mat-form-field>
+	  <mat-label>To Do</mat-label>
+	  <textarea matInput
+		    cdkTextareaAutosize
+		    #autosize="cdkTextareaAutosize"
+		    cdkAutosizeMinRows="1"
+		    cdkAutosizeMaxRows="5"
+		    [(ngModel)]=row.todo></textarea>
+	</mat-form-field>
       </mat-cell>
     </ng-container>
 

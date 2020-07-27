@@ -19,10 +19,10 @@ export class TableComponent {
        ngOnInit() {
           this.dataSource = [{class: "a", monday: "monday", tuesday: "tuesday", wednesday: "wednesday",
 	      thursday: "thursday", friday: "friday", letterGrade: "letterGrade", percentage: "percentage",
-	      gradeColor: "gradeColor", comments: "comments", todo: "todo"},
+	      gradeColor: "green", comments: "comments", todo: "todo"},
 	      {class: "a", monday: "monday", tuesday: "tuesday", wednesday: "wednesday",
               thursday: "thursday", friday: "friday", letterGrade: "letterGrade", percentage: "percentage",
-              gradeColor: "gradeColor", comments: "comments", todo: "todo"}];
+              gradeColor: "red", comments: "comments", todo: "todo"}];
           //this.csvServ.getPageReq(0);
        }
 }
