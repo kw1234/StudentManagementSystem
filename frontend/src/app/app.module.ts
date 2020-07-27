@@ -20,6 +20,8 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {TableService} from './table.service';
+
 @NgModule({
   declarations: [
     AppComponent, TableComponent
@@ -42,7 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatProgressSpinnerModule,
     MatPaginatorModule
   ],
-  providers: [],
+  providers: [TableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

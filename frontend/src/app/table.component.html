@@ -1,153 +1,109 @@
-<div style="position: relative; max-height: 400px; max-width: 95%; overflow: auto;">
-  <table>
-    <tr>
-      <th>Class</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Letter Grade</th>
-      <th>Percentage (%)</th>
-      <th>Grade Color Indicator</th>
-      <th>Comments</th>
-      <th>To Do</th>
-    </tr>
-    <tbody>
-      <tr>
-	<td>
-	  <mat-form-field>
-            <input matInput placeholder="Math">
-          </mat-form-field>
-	</td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="HW1">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Quiz">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="HW2">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Test">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="HW3">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="A">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="95%">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Green">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Keep it Up">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="None">
-          </mat-form-field>
-	</td>
-      </tr>
-      <tr>
-	<td>
-	  <mat-form-field>
-            <input matInput placeholder="Science">
-          </mat-form-field>
-	</td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="HW1">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="HW2">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Quiz">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="B-">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="81%">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Light Green">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Needs Work">
-          </mat-form-field>
-        </td>
-	<td>
-          <mat-form-field>
-            <input matInput placeholder="Study More">
-          </mat-form-field>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
 <div style="position: relative; min-height: 200px;">
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="position: relative; max-height: 400px; overflow: auto;">
-    <ng-container matColumnDef="guid">
-      <mat-header-cell *matHeaderCellDef> Guid </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.guid}} </mat-cell>
+    <ng-container matColumnDef="class">
+      <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+      <mat-cell *matCellDef="let row"> 
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.class>
+        </mat-form-field>
+      </mat-cell>
     </ng-container>
     
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    <ng-container matColumnDef="monday">
+      <mat-header-cell *matHeaderCellDef> Monday </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.monday>
+        </mat-form-field>
+      </mat-cell>
     </ng-container>
     
-    <ng-container matColumnDef="first">
-      <mat-header-cell *matHeaderCellDef> First </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.first}} </mat-cell>
+    <ng-container matColumnDef="tuesday">
+      <mat-header-cell *matHeaderCellDef> Tuesday </mat-header-cell>
+      <mat-cell *matCellDef="let row"> 
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.tuesday>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="wednesday">
+      <mat-header-cell *matHeaderCellDef> Wednesday </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.wednesday>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="thursday">
+      <mat-header-cell *matHeaderCellDef> Thursday </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.thursday>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="friday">
+      <mat-header-cell *matHeaderCellDef> Friday </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.friday>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="letterGrade">
+      <mat-header-cell *matHeaderCellDef> Letter Grade </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.letterGrade>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percentage">
+      <mat-header-cell *matHeaderCellDef> Percentage </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.percentage>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gradeColor">
+      <mat-header-cell *matHeaderCellDef> Grade Color </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.gradeColor>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.comments>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="todo">
+      <mat-header-cell *matHeaderCellDef> To Do </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+	<mat-form-field>
+          <input matInput placeholder="" [(ngModel)]=row.todo>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="save">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-raised-button color="primary">Save</button>
+      </mat-cell>
     </ng-container>
     
     <mat-header-row *matHeaderRowDef="colNames"></mat-header-row>
