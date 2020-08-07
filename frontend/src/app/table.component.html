@@ -1,6 +1,7 @@
 <div style="position: relative; min-height: 200px;">
   <mat-table
     [dataSource]="dataSource"
+    multiTemplateDataRows
     class="mat-elevation-z8"
     style="position: relative; overflow: auto; padding: 8px;"
   >
@@ -15,63 +16,103 @@
 
     <ng-container matColumnDef="monday">
       <mat-header-cell *matHeaderCellDef> Monday </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input matInput placeholder="Monday's HW" [(ngModel)]="row.monday" />
-        </mat-form-field>
+      <mat-cell *matCellDef="let row; let i = index">
+        <div class="wrapDayCols">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Assignment"
+              [(ngModel)]="row.monday.name"
+            />
+          </mat-form-field>
+          <assignment
+            (sendToParent)="getFromChild($event)"
+            [rowData]="{ index: i, data: row.monday }"
+          ></assignment>
+        </div>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tuesday">
       <mat-header-cell *matHeaderCellDef> Tuesday </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Tuesday's HW"
-            [(ngModel)]="row.tuesday"
-          />
-        </mat-form-field>
+        <div class="wrapDayCols">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Assignment"
+              [(ngModel)]="row.tuesday.name"
+            />
+          </mat-form-field>
+          <assignment
+            (sendToParent)="getFromChild($event)"
+            [rowData]="{ data: row.tuesday }"
+          ></assignment>
+        </div>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="wednesday">
       <mat-header-cell *matHeaderCellDef> Wednesday </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Wednesday's HW"
-            [(ngModel)]="row.wednesday"
-          />
-        </mat-form-field>
+        <div class="wrapDayCols">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Assignment"
+              [(ngModel)]="row.wednesday.name"
+            />
+          </mat-form-field>
+          <assignment
+            (sendToParent)="getFromChild($event)"
+            [rowData]="{ data: row.wednesday }"
+          ></assignment>
+        </div>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="thursday">
       <mat-header-cell *matHeaderCellDef> Thursday </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Thursday's HW"
-            [(ngModel)]="row.thursday"
-          />
-        </mat-form-field>
+        <div class="wrapDayCols">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Assignment"
+              [(ngModel)]="row.thursday.name"
+            />
+          </mat-form-field>
+          <assignment
+            (sendToParent)="getFromChild($event)"
+            [rowData]="{ data: row.thursday }"
+          ></assignment>
+        </div>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="friday">
       <mat-header-cell *matHeaderCellDef> Friday </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input matInput placeholder="Friday's HW" [(ngModel)]="row.friday" />
-        </mat-form-field>
+        <div class="wrapDayCols">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Assignment"
+              [(ngModel)]="row.friday.name"
+            />
+          </mat-form-field>
+          <assignment
+            (sendToParent)="getFromChild($event)"
+            [rowData]="{ data: row.friday }"
+          ></assignment>
+        </div>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="letterGrade">
-      <mat-header-cell *matHeaderCellDef> Letter Grade </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        Letter Grade
+      </mat-header-cell>
       <mat-cell *matCellDef="let row" style="text-align: center;">
         <!--<mat-form-field>
           <input matInput placeholder="" [(ngModel)]="row.letterGrade" />
@@ -151,5 +192,11 @@
 
     <mat-header-row *matHeaderRowDef="colNames"></mat-header-row>
     <mat-row *matRowDef="let row; columns: colNames"></mat-row>
+    <!--<mat-row
+      *matRowDef="
+        let row;
+        columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
+      "
+    ></mat-row>-->
   </mat-table>
 </div>

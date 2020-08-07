@@ -1,4 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { TableService } from './table.service';
 
 import { Injectable } from '@angular/core';
@@ -37,10 +43,13 @@ import {
 })
 export class AssignmentComponent {
   disableSelect = new FormControl(false);
+  @Input() rowData: any = { index: 0, data: { type: '', progress: '' } };
+  @Output() sendToParent = new EventEmitter();
 
-  wordData = {
-    word: '',
-  };
+  selections = [];
+
+  selectedAssignment = '';
+  selectedProgress = '';
 
   dataSource = [];
   data = {};
@@ -50,27 +59,25 @@ export class AssignmentComponent {
 
   //when: (index: number, rowData: T) => boolean;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.selections = [];
+    for (let i = 0; i < 8; i++) {
+      this.selections.push({
+        selectedAssignment: '',
+        selectedProgress: '',
+      });
+    }
+  }
 
   saveData(data) {}
 
-  tableInput() {
-    this.http.post(this.BASE_URL + '/saveData', this.dataSource).subscribe(
-      (response) => {
-        console.log(response);
-        //this.textStore = [response.json()];
-        //this.textSubject.next(this.textStore);
-        //this.getFileNames();
-        this.dataSource = response.json();
-      },
-      (error) => {
-        console.log(`unable to save data with error: ${error}`);
-      }
-    );
-    //this.tableService.saveData(this.dataSource);
-    //console.log(this.tableService.getData());
-    //this.tableService.getData();
-    //this.dataSource = this.tableService.getData();
-    //console.log(this.tableService.getData());
+  getSelectedOptions() {
+    return [this.selectedAssignment, this.selectedProgress];
+  }
+
+  onChange(event) {
+    console.log(event);
+    console.log(this.rowData);
+    this.sendToParent.emit(this.rowData);
   }
 }

@@ -1,15 +1,12 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
 const app = express();
-
 const weeklyService = require('./routes/weeklyService.js');
 
 app.use(bodyParser.json());
 
 const router = express.Router();
-
 router.get('/', function (req, res, next) {
   next();
 });

@@ -10,11 +10,31 @@ import { Subject } from 'rxjs';
 //import {Observable} from 'rxjs/Rx';
 import { timeout } from 'rxjs/operators';
 'rxjs/Rx';
+import { FormControl } from '@angular/forms';
+import { AssignmentComponent } from './assignment.component';
+
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'scheduleTable',
   templateUrl: './table.component.html',
   styleUrls: ['table.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
 export class TableComponent {
   dataSource = [];
@@ -42,16 +62,38 @@ export class TableComponent {
 
   constructor(public tableService: TableService, private http: Http) {}
 
+  //when: (index: number, rowData: T) => boolean;
+
   ngOnInit() {
     this.dataSource = [];
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
         class: '',
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
+        monday: {
+          name: '',
+          type: '',
+          progress: '',
+        },
+        tuesday: {
+          name: '',
+          type: '',
+          progress: '',
+        },
+        wednesday: {
+          name: '',
+          type: '',
+          progress: '',
+        },
+        thursday: {
+          name: '',
+          type: '',
+          progress: '',
+        },
+        friday: {
+          name: '',
+          type: '',
+          progress: '',
+        },
         letterGrade: '',
         percentage: '',
         gradeColor: '',
@@ -65,6 +107,7 @@ export class TableComponent {
   saveData(data) {}
 
   tableInput() {
+    console.log(this.dataSource);
     this.http.post(this.BASE_URL + '/saveData', this.dataSource).subscribe(
       (response) => {
         console.log(response);
@@ -82,5 +125,10 @@ export class TableComponent {
     //this.tableService.getData();
     //this.dataSource = this.tableService.getData();
     //console.log(this.tableService.getData());
+  }
+
+  getFromChild(value) {
+    console.log('mamama');
+    console.log(value);
   }
 }

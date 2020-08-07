@@ -2,6 +2,7 @@ let ma = 'pa';
 
 exports.saveData = async function (req, res) {
   let rows = req.body;
+  console.log(rows);
   for (i = 0; i < rows.length; i++) {
     let dict = rows[i];
     const percentage = parseInt(dict.percentage);

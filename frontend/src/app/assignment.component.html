@@ -1,20 +1,26 @@
 <div>
   <mat-form-field appearance="fill">
     <mat-label>HW/Test/Quiz</mat-label>
-    <mat-select [disabled]="disableSelect.value">
-      <mat-option value="option1">HW</mat-option>
-      <mat-option value="option3">Test</mat-option>
-      <mat-option value="option3">Quiz</mat-option>
+    <mat-select
+      (ngModelChange)="onChange($event)"
+      [(ngModel)]="rowData.data.type"
+    >
+      <mat-option value="hw">HW</mat-option>
+      <mat-option value="test">Test</mat-option>
+      <mat-option value="quiz">Quiz</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 <div>
   <mat-form-field appearance="fill">
     <mat-label>Progress</mat-label>
-    <mat-select>
-      <mat-option value="option1">Not Started</mat-option>
-      <mat-option value="option2">In Progress</mat-option>
-      <mat-option value="option3">Completed</mat-option>
+    <mat-select
+      (ngModelChange)="onChange($event)"
+      [(ngModel)]="rowData.data.progress"
+    >
+      <mat-option value="notStarted">Not Started</mat-option>
+      <mat-option value="inProgress">In Progress</mat-option>
+      <mat-option value="completed">Completed</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
