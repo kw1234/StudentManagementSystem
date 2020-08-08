@@ -47,7 +47,6 @@ export class TableComponent {
     'friday',
     'letterGrade',
     'percentage',
-    'gradeColor',
     'comments',
     'todo',
     'save',
@@ -61,8 +60,6 @@ export class TableComponent {
   BASE_URL = 'http://localhost:8080/api';
 
   constructor(public tableService: TableService, private http: Http) {}
-
-  //when: (index: number, rowData: T) => boolean;
 
   ngOnInit() {
     this.dataSource = [];
@@ -101,7 +98,6 @@ export class TableComponent {
         todo: '',
       });
     }
-    //this.csvServ.getPageReq(0);
   }
 
   saveData(data) {}
@@ -120,11 +116,6 @@ export class TableComponent {
         console.log(`unable to save data with error: ${error}`);
       }
     );
-    //this.tableService.saveData(this.dataSource);
-    //console.log(this.tableService.getData());
-    //this.tableService.getData();
-    //this.dataSource = this.tableService.getData();
-    //console.log(this.tableService.getData());
   }
 
   getFromChild(value) {

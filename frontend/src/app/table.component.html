@@ -9,7 +9,12 @@
       <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <mat-form-field>
-          <input matInput placeholder="Class Name" [(ngModel)]="row.class" />
+          <input
+            matInput
+            name="class"
+            placeholder="Class Name"
+            [(ngModel)]="row.class"
+          />
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -21,6 +26,7 @@
           <mat-form-field>
             <input
               matInput
+              name="monday"
               placeholder="Assignment"
               [(ngModel)]="row.monday.name"
             />
@@ -40,6 +46,7 @@
           <mat-form-field>
             <input
               matInput
+              name="tuesday"
               placeholder="Assignment"
               [(ngModel)]="row.tuesday.name"
             />
@@ -59,6 +66,7 @@
           <mat-form-field>
             <input
               matInput
+              name="wednesday"
               placeholder="Assignment"
               [(ngModel)]="row.wednesday.name"
             />
@@ -78,6 +86,7 @@
           <mat-form-field>
             <input
               matInput
+              name="thursday"
               placeholder="Assignment"
               [(ngModel)]="row.thursday.name"
             />
@@ -97,6 +106,7 @@
           <mat-form-field>
             <input
               matInput
+              name="friday"
               placeholder="Assignment"
               [(ngModel)]="row.friday.name"
             />
@@ -113,14 +123,14 @@
       <mat-header-cell *matHeaderCellDef>
         Letter Grade
       </mat-header-cell>
-      <mat-cell *matCellDef="let row" style="text-align: center;">
-        <!--<mat-form-field>
-          <input matInput placeholder="" [(ngModel)]="row.letterGrade" />
-        </mat-form-field>-->
-        <div style="text-align: center;" [(ngModel)]="row.letterGrade">
+      <div>
+        <mat-cell
+          *matCellDef="let row"
+          style="background-color:{{ row.gradeColor }}"
+        >
           {{ row.letterGrade }}
-        </div>
-      </mat-cell>
+        </mat-cell>
+      </div>
     </ng-container>
 
     <ng-container matColumnDef="percentage">
@@ -129,21 +139,11 @@
         <mat-form-field>
           <input
             matInput
+            name="percentage"
             placeholder="Grade Percentage"
             [(ngModel)]="row.percentage"
           />
         </mat-form-field>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="gradeColor">
-      <mat-header-cell *matHeaderCellDef>
-        Grade Color Indicator
-      </mat-header-cell>
-      <mat-cell
-        *matCellDef="let row"
-        style="background-color:{{ row.gradeColor }}"
-      >
       </mat-cell>
     </ng-container>
 
@@ -154,6 +154,7 @@
           <mat-label>Comments</mat-label>
           <textarea
             matInput
+            name="comments"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
@@ -171,6 +172,7 @@
           <mat-label>To Do</mat-label>
           <textarea
             matInput
+            name="todo"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"

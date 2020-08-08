@@ -26,6 +26,7 @@ import { MamboComponent } from './mambo.component';
 import { AssignmentComponent } from './assignment.component';
 
 import { TableService } from './table.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { TableService } from './table.service';
     MatPaginatorModule,
     MatCheckboxModule,
     MatSelectModule,
+    NgbModule,
   ],
   providers: [TableService],
   bootstrap: [AppComponent],

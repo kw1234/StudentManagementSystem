@@ -1,30 +1,10 @@
-.mat-form-field--inline {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.mat-form-field--inline .mat-form-field {
-  display: inline-block;
-  width: 100%;
-  vertical-align: middle;
-}
-
-.mat-form-field--inline .mat-form-field:nth-child(1) {
-  margin-right: 10px;
-}
-
-.mat-row {
-  height: auto;
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
 }
 
 .mat-cell {
   padding: 16px 0px 16px 8px;
-}
-
-.mat-header-cell {
-  flex-direction: column;
-  justify-content: center;
 }
 
 .mat-form-field {
@@ -36,50 +16,41 @@ table {
   width: 100%;
 }
 
-tr.example-detail-row {
-  height: 0;
-}
-
-tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
-}
-
-tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
-}
-
-.example-element-row td {
-  border-bottom-width: 0;
-}
-
-.example-element-detail {
-  overflow: hidden;
-  display: flex;
-}
-
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
-}
-
-.example-element-description {
-  padding: 16px;
-}
-
-.example-element-description-attribution {
-  opacity: 0.5;
-}
-
-.wrap {
+.wrapDayCols {
   display: inline-block;
+}
+
+.typeAndProgress {
+  font-size: 12px;
+  display: inline-block;
+  width: 70px;
+  padding: 2px;
+}
+
+section {
+  white-space: nowrap;
+}
+
+.container {
+  white-space: nowrap;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  display: inline-block;
+  width: 33%;
+  white-space: normal;
+}
+
+#inner {
+  display: table;
+  margin: 0 auto;
+}
+
+#outer {
+  width: 100%;
 }
