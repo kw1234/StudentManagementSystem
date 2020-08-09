@@ -12,7 +12,8 @@ The planner can keep track of:
 - comments and todo's with regards to each class
 
 Below are screenshots of the planner in a very early stage:
-![Alt text](![alt text](pictures/earlyPlannerScreenshot.png))
+![Alt text](pictures/earlyPlannerScreenshot.png)
+![Alt text](pictures/earlyPlannerScreenshot2.png)
 
 
 ### Status Report:
