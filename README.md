@@ -11,8 +11,8 @@ The planner can keep track of:
 - overall grade percentage in each class
 - comments and todo's with regards to each class
 
-Below is a screenshot of the planner in a very early stage:
-
+Below are screenshots of the planner in a very early stage:
+![Alt text](/pictures/earlyPlannerScreenshot?raw=true "Optional Title")
 
 
 ### Status Report:
