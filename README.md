@@ -12,7 +12,7 @@ The planner can keep track of:
 - comments and todo's with regards to each class
 
 Below are screenshots of the planner in a very early stage:
-![Alt text](/pictures/earlyPlannerScreenshot?raw=true "Optional Title")
+![Alt text](![alt text](pictures/earlyPlannerScreenshot))
 
 
 ### Status Report:
