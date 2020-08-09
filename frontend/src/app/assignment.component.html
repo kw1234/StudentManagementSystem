@@ -3,12 +3,13 @@
     <mat-form-field appearance="fill" class="typeAndProgress">
       <mat-label>Type</mat-label>
       <mat-select
+        panelClass="panel-{{ rowData.data.type }}"
         (ngModelChange)="onChange($event)"
         [(ngModel)]="rowData.data.type"
       >
-        <mat-option value="hw">HW</mat-option>
-        <mat-option value="test">Test</mat-option>
-        <mat-option value="quiz">Quiz</mat-option>
+        <mat-option style="color: blue;" value="hw">HW</mat-option>
+        <mat-option style="color: red;" value="test">Test</mat-option>
+        <mat-option style="color: yellow;" value="quiz">Quiz</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

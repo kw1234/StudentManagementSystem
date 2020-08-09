@@ -3,7 +3,7 @@
     [dataSource]="dataSource"
     multiTemplateDataRows
     class="mat-elevation-z8"
-    style="position: relative; overflow: auto; padding: 8px;"
+    style="position: relative; overflow: auto; padding: 8px; max-height: 500px;"
   >
     <ng-container matColumnDef="class">
       <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
@@ -158,7 +158,7 @@
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"
+            cdkAutosizeMaxRows="10"
             [(ngModel)]="row.comments"
           ></textarea>
         </mat-form-field>
@@ -176,7 +176,7 @@
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"
+            cdkAutosizeMaxRows="10"
             [(ngModel)]="row.todo"
           ></textarea>
         </mat-form-field>

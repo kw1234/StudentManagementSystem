@@ -24,6 +24,7 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table.component';
 import { MamboComponent } from './mambo.component';
 import { AssignmentComponent } from './assignment.component';
+import { ToolbarComponent } from './toolbar.component';
 
 import { TableService } from './table.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TableComponent,
     MamboComponent,
     AssignmentComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

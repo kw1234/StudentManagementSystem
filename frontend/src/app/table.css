@@ -54,3 +54,34 @@ section {
 #outer {
   width: 100%;
 }
+
+.select-type.mat-form-field-label {
+  color: green !important;
+}
+.select-type.mat-form-field-underline {
+  background-color: green !important;
+}
+
+.panel-hw.mat-select-panel {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.panel-test.mat-select-panel {
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.panel-quiz.mat-select-panel {
+  background: rgba(0, 0, 255, 0.5);
+}
+
+.panel-HW.mat-select-panel {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.panel-Test.mat-select-panel {
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.panel-Quiz.mat-select-panel {
+  background: rgba(0, 0, 255, 0.5);
+}
