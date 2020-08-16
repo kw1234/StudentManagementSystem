@@ -12,7 +12,11 @@ The planner can keep track of:
 - comments and todo's with regards to each class
 
 Below are screenshots of the planner in a very early stage:
+
+Unedited Planner
 ![Alt text](pictures/earlyPlannerScreenshot.png)
+
+Filled Out Planner
 ![Alt text](pictures/earlyPlannerScreenshot2.png)
 
 
@@ -20,10 +24,16 @@ Below are screenshots of the planner in a very early stage:
 The Status Report is meant as a tool for students, parents, and tutors. It gives a high level overview of how the student has been performing over the semester / school year. Visual displays such as charts and graphs will be provided.
 
 
-## Implementation
+# Implementation
 
 ### Backend
 The backend server is written in Node.js
 
 ### Frontend
 The frontend was created using Angular.
+
+# Installation
+
+# Usage
+
+
