@@ -24,10 +24,16 @@ Filled Out Planner
 The Status Report is meant as a tool for students, parents, and tutors. It gives a high level overview of how the student has been performing over the semester / school year. Visual displays such as charts and graphs will be provided.
 
 
-## Implementation
+# Implementation
 
 ### Backend
 The backend server is written in Node.js
 
 ### Frontend
 The frontend was created using Angular.
+
+# Installation
+
+# Usage
+
+
