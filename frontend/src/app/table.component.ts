@@ -62,6 +62,7 @@ export class TableComponent {
   constructor(public tableService: TableService, private http: Http) {}
 
   ngOnInit() {
+    this.getTableData();
     this.dataSource = [];
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
@@ -116,6 +117,27 @@ export class TableComponent {
         console.log(`unable to save data with error: ${error}`);
       }
     );
+  }
+
+  getTableData() {
+    console.log(this.dataSource);
+    this.http
+      .post(this.BASE_URL + '/getData', {
+        studentId: 'student1',
+        weekId: '08/09/20',
+      })
+      .subscribe(
+        (response) => {
+          console.log(response);
+          //this.textStore = [response.json()];
+          //this.textSubject.next(this.textStore);
+          //this.getFileNames();
+          //this.dataSource = response.json();
+        },
+        (error) => {
+          console.log(`unable to save data with error: ${error}`);
+        }
+      );
   }
 
   getFromChild(value) {

@@ -1,7 +1,22 @@
-const { MongoClient } = require('mongodb');
-const uri = 'mongodb+srv://:@cluster0-1jamj.mongodb.net/StudentSystem?retryWrites=true&w=majority';
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
-let ma = 'pa';
+const { MongoClient } = require('mongodb');
+const uri = `mongodb+srv://${process.env.username}:${process.env.password}@cluster0-1jamj.mongodb.net/StudentSystem?retryWrites=true&w=majority`;
+
+const validate = require('jsonschema').validate;
+
+// Schema to compare new POST entries to
+const plannerSchema = {
+  studentId: 'string',
+  weekId: 'string',
+  plannerData: {
+    type: 'array',
+    items: { type: 'string' },
+  },
+  required: ['name', 'price', 'categories'],
+};
 
 exports.saveData = async function (req, res) {
   let rows = req.body;
@@ -14,13 +29,33 @@ exports.saveData = async function (req, res) {
       continue;
     }
     const [letterGrade, color] = getLetterGradeAndColor(percentage);
-    dict['letterGrade'] = letterGrade;
-    dict['gradeColor'] = color;
+    dict.letterGrade = letterGrade;
+    dict.gradeColor = color;
   }
   console.log(rows);
-  const entry = { studentId: '', weekId: '', plannerData: rows };
+  const entry = { studentId: 'student1', weekId: '08/09/20', plannerData: rows };
+
+  /*try {
+    validate(entry, plannerSchema, { throwError: true });
+  } catch (error) {
+    res.status(401).end('Invalid body format: ' + error.message);
+    return;
+  }*/
+
   writePlannerEntry(entry).catch(console.error);
   res.send(rows);
+};
+
+exports.getData = async function (req, res) {
+  let body = req.body;
+  console.log(body);
+  const studentId = body.studentId;
+  const weekId = body.weekId;
+
+  const result = getPlannerEntry(studentId, weekId);
+
+  if (!result) res.error();
+  res.send(result);
 };
 
 function getLetterGradeAndColor(percentage) {
@@ -51,16 +86,45 @@ async function createEntry(client, entry) {
   console.log(`New listing created with the following id: ${result.insertedId}`);
 }
 
+async function getEntry(client, studentId, weekId) {
+  const result = await client
+    .db('StudentSystem')
+    .collection('PlannerDocs')
+    .findOne({ studentId: studentId, weekId: weekId });
+
+  if (result) {
+    console.log(result);
+  } else {
+    console.log(`No listings found with the studentId '${studentId}' and weekId '${weekId}'`);
+  }
+}
+
 async function writePlannerEntry(entry) {
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   try {
     await client.connect();
 
-    //await listDatabases(client);
     await createEntry(client, entry);
   } catch (e) {
     console.error(e);
   } finally {
     await client.close();
   }
+}
+
+async function getPlannerEntry(studentId, weekId) {
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  let entry = {};
+  try {
+    await client.connect();
+
+    entry = await getEntry(client, studentId, weekId);
+    console.log(entry);
+    return entry;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+  return entry;
 }
