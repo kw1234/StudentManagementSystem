@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 const api = express.Router();
-var auth = express.Router();
+const auth = express.Router();
 
 app.get('/', function (req, res) {
   res.send('hello');
@@ -45,8 +45,8 @@ function checkAuthenticated(req, res, next) {
     return res.status(401).send({ message: 'Unauthorized request. Missing authentication header' });
   }
 
-  var token = req.header('authorization').split(' ')[1];
-  var payload = jwt.decode(token, '123');
+  const token = req.header('authorization').split(' ')[1];
+  const payload = jwt.decode(token, '123');
 
   if (!payload) {
     return res

@@ -17,6 +17,7 @@ import { Subject } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 'rxjs/Rx';
 import { FormControl } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'toolbar',
@@ -37,7 +38,11 @@ export class ToolbarComponent {
   data = {};
   BASE_URL = 'http://localhost:8080/api';
 
-  constructor(public tableService: TableService, private http: Http) {}
+  constructor(
+    public tableService: TableService,
+    public auth: AuthService,
+    private http: Http
+  ) {}
 
   ngOnInit() {}
 }

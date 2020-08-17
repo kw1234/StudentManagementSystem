@@ -20,22 +20,41 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 
 import { TableComponent } from './table.component';
-import { MamboComponent } from './mambo.component';
 import { AssignmentComponent } from './assignment.component';
 import { ToolbarComponent } from './toolbar.component';
+import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
 
 import { TableService } from './table.service';
+import { AuthService } from './auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+var routes = [
+  {
+    path: '',
+    component: ToolbarComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    MamboComponent,
     AssignmentComponent,
     ToolbarComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +76,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatCheckboxModule,
     MatSelectModule,
     NgbModule,
+    RouterModule.forRoot(routes),
   ],
-  providers: [TableService],
+  providers: [TableService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
