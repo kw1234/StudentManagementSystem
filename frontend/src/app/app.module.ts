@@ -35,7 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var routes = [
   {
     path: '',
-    component: ToolbarComponent,
+    component: TableComponent,
   },
   {
     path: 'register',
@@ -66,6 +66,7 @@ var routes = [
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatListModule,
     MatTableModule,

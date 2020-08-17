@@ -25,24 +25,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['table.css'],
 })
 export class ToolbarComponent {
-  disableSelect = new FormControl(false);
-  @Input() rowData: any = { index: 0, data: { type: '', progress: '' } };
-  @Output() sendToParent = new EventEmitter();
-
-  selections = [];
-
-  selectedAssignment = '';
-  selectedProgress = '';
-
-  dataSource = [];
-  data = {};
-  BASE_URL = 'http://localhost:8080/api';
-
-  constructor(
-    public tableService: TableService,
-    public auth: AuthService,
-    private http: Http
-  ) {}
+  constructor(public tableService: TableService, public auth: AuthService) {}
 
   ngOnInit() {}
 }
