@@ -56,6 +56,8 @@ export class AuthService {
   }
 
   authenticate(res, email) {
+    console.log(res);
+    console.log(email);
     // adding authentication code to redirect the route to home page if authentication is successful
     var authResponse = res.json();
 
