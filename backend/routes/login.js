@@ -28,7 +28,8 @@ exports.login = async function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
 
-  const user = await getUser(email);
+  const user = await getUserEntry(email);
+  console.log(user);
 
   if (user) {
     const comparison = await bcrypt.compare(password, user.password);
@@ -83,7 +84,7 @@ async function getUserEntry(email) {
   });
   try {
     await client.connect();
-    const user = await getUser(client, entry);
+    const user = await getUser(client, email);
     return user;
   } catch (e) {
     console.error(e);

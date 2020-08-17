@@ -6,14 +6,16 @@
   <button mat-button routerLink="/">Weekly Planner</button>
   <button mat-button routerLink="/report">Status Report</button>
   <span style="flex: 1 1 auto;"></span>
-  <button mat-button routerLink="/login">
+  <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/login">
     Login
   </button>
-  <button mat-button routerLink="/register">
+  <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/register">
     Register
   </button>
-  <button mat-button routerLink="/user">Welcome **insert name**</button>
-  <button mat-button>
+  <button *ngIf="auth.isAuthenticated" mat-button routerLink="/user">
+    Welcome {{ auth.name }}
+  </button>
+  <button *ngIf="auth.isAuthenticated" (click)="auth.logout()" mat-button>
     Logout
   </button>
 </mat-toolbar>
