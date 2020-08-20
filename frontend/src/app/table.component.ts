@@ -62,7 +62,7 @@ export class TableComponent {
   constructor(public tableService: TableService, private http: Http) {}
 
   ngOnInit() {
-    this.getTableData();
+    this.getTableData('1', '8/19/20');
     this.dataSource = [];
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
@@ -105,7 +105,8 @@ export class TableComponent {
 
   tableInput() {
     console.log(this.dataSource);
-    this.http.post(this.BASE_URL + '/postData', this.dataSource).subscribe(
+    const entry = { rows: this.dataSource, userId: '1', weekId: '8/19/20' };
+    this.http.post(this.BASE_URL + '/postData', entry).subscribe(
       (response) => {
         console.log(response);
         //this.textStore = [response.json()];
