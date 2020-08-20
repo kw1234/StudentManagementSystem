@@ -105,7 +105,7 @@ export class TableComponent {
 
   tableInput() {
     console.log(this.dataSource);
-    this.http.post(this.BASE_URL + '/saveData', this.dataSource).subscribe(
+    this.http.post(this.BASE_URL + '/postData', this.dataSource).subscribe(
       (response) => {
         console.log(response);
         //this.textStore = [response.json()];
@@ -119,13 +119,10 @@ export class TableComponent {
     );
   }
 
-  getTableData() {
+  getTableData(userId, weekId) {
     console.log(this.dataSource);
     this.http
-      .post(this.BASE_URL + '/getData', {
-        studentId: 'student1',
-        weekId: '08/09/20',
-      })
+      .get(this.BASE_URL + `/getData?studentId=${userId}&weekId=${weekId}`)
       .subscribe(
         (response) => {
           console.log(response);

@@ -49,7 +49,7 @@ app.get('/', function (req, res) {
   res.send('hello');
 });
 
-api.post('/saveData', weeklyService.postData);
+api.post('/postData', weeklyService.postData);
 api.post('/getData', weeklyService.getData);
 
 auth.post('/login', login.login);
