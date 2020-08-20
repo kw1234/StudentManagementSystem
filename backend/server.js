@@ -1,16 +1,33 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
-const app = express();
-const login = require('./routes/login');
-const weeklyService = require('./routes/weeklyService.js');
 const jwt = require('jsonwebtoken');
+const { MongoClient } = require('mongodb');
+const login = require('./services/login');
+const weeklyService = require('./services/weeklyService.js');
+
+const app = express();
+
+const uri = `mongodb+srv://bgaskwarrier:kaw009020@cluster0-1jamj.mongodb.net/StudentSystem?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
 
 const router = express.Router();
 router.get('/', function (req, res, next) {
   next();
+});
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+client.connect(function (err, database) {
+  if (err) throw err;
+
+  app.client = database;
+
+  app.listen(8080);
+  console.log('Listening on port 8080');
 });
 
 app.use('/', router);
@@ -32,12 +49,10 @@ app.get('/', function (req, res) {
   res.send('hello');
 });
 
-api.post('/saveData', weeklyService.saveData);
-
+api.post('/saveData', weeklyService.postData);
 api.post('/getData', weeklyService.getData);
 
 auth.post('/login', login.login);
-
 auth.post('/register', login.register);
 
 function checkAuthenticated(req, res, next) {
@@ -61,5 +76,3 @@ function checkAuthenticated(req, res, next) {
 
 app.use('/api', api);
 app.use('/auth', auth);
-
-app.listen(8080);
