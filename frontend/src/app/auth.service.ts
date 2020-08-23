@@ -53,6 +53,8 @@ export class AuthService {
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.NAME_KEY);
+    localStorage.removeItem(this.EMAIL_KEY);
+    window.location.replace('/');
   }
 
   authenticate(res, email) {

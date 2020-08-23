@@ -1,4 +1,5 @@
 const validate = require('jsonschema').validate;
+var moment = require('moment'); // require
 
 // Schema to compare new POST entries to
 const plannerSchema = {
@@ -15,24 +16,26 @@ exports.postData = async function (req, res) {
   const body = req.body;
   console.log(body);
   let rows = body.rows;
-  const userId = body.userId;
+  const email = body.email;
   const weekId = body.weekId;
 
   rows = formatRows(rows);
-  const entry = { userId, weekId, plannerData: rows };
+  const entry = { email: email, weekId: weekId };
+  const val = { plannerData: rows };
 
-  createEntry(req.app.client, entry).catch((error) => {
+  createEntry(req.app.client, entry, val).catch((error) => {
     res.status(400).end(`Error in the post planner data request: ${error.message}`);
   });
-  res.send(rows);
+  res.send({ email: email, weekId: weekId, plannerData: rows });
 };
 
 exports.getData = async function (req, res) {
-  const { query } = req;
-  const { userId } = query;
-  const { weekId } = query;
+  const query = req.query;
+  const email = query.email;
+  const weekId = query.weekId;
+  console.log(email + ' ' + weekId);
 
-  const result = getEntry(req.app.client, userId, weekId).catch((error) => {
+  const result = await getEntry(req.app.client, email, weekId).catch((error) => {
     res.status(400).end(`Error in the get planner data request: ${error.message}`);
   });
 
@@ -40,16 +43,19 @@ exports.getData = async function (req, res) {
   res.send(result);
 };
 
-async function createEntry(client, entry) {
-  const result = await client.db('StudentSystem').collection('PlannerDocs').insertOne(entry);
-  console.log(`New listing created with the following id: ${result.insertedId}`);
-}
-
-async function getEntry(client, userId, weekId) {
+async function createEntry(client, key, val) {
   const result = await client
     .db('StudentSystem')
     .collection('PlannerDocs')
-    .findOne({ userId: userId, weekId: weekId });
+    .update(key, { $set: val }, { upsert: true });
+  console.log(`New listing created with the following id: ${result.insertedId}`);
+}
+
+async function getEntry(client, email, weekId) {
+  const result = await client
+    .db('StudentSystem')
+    .collection('PlannerDocs')
+    .findOne({ email: email, weekId: weekId });
   return result;
 }
 
@@ -82,4 +88,8 @@ function getLetterGradeAndColor(percentage) {
   if (percentage >= 62.5) return ['D', 'orange'];
   if (percentage >= 59.5) return ['D-', 'orange'];
   return ['F', 'red'];
+}
+
+function getCurrentWeek() {
+  return moment().format('W');
 }

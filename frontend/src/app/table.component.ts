@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TableService } from './table.service';
+import { AuthService } from './auth.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -12,6 +13,7 @@ import { timeout } from 'rxjs/operators';
 'rxjs/Rx';
 import { FormControl } from '@angular/forms';
 import { AssignmentComponent } from './assignment.component';
+import * as moment from 'moment';
 
 import {
   animate,
@@ -59,11 +61,16 @@ export class TableComponent {
   data = {};
   BASE_URL = 'http://localhost:8080/api';
 
-  constructor(public tableService: TableService, private http: Http) {}
+  constructor(
+    public tableService: TableService,
+    public auth: AuthService,
+    private http: Http
+  ) {}
 
   ngOnInit() {
-    this.getTableData('1', '8/19/20');
-    this.dataSource = [];
+    //this.dataSource = [];
+    console.log(this.auth.email);
+    this.getTableData(this.auth.email, this.getCurrentWeek());
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
         class: '',
@@ -105,14 +112,19 @@ export class TableComponent {
 
   tableInput() {
     console.log(this.dataSource);
-    const entry = { rows: this.dataSource, userId: '1', weekId: '8/19/20' };
+    const entry = {
+      rows: this.dataSource,
+      email: this.auth.email,
+      weekId: this.getCurrentWeek(),
+    };
     this.http.post(this.BASE_URL + '/postData', entry).subscribe(
       (response) => {
-        console.log(response);
+        //console.log(response);
         //this.textStore = [response.json()];
         //this.textSubject.next(this.textStore);
         //this.getFileNames();
-        this.dataSource = response.json();
+        const result = response.json();
+        this.dataSource = result.plannerData;
       },
       (error) => {
         console.log(`unable to save data with error: ${error}`);
@@ -120,17 +132,18 @@ export class TableComponent {
     );
   }
 
-  getTableData(userId, weekId) {
+  getTableData(email, weekId) {
     console.log(this.dataSource);
     this.http
-      .get(this.BASE_URL + `/getData?studentId=${userId}&weekId=${weekId}`)
+      .get(this.BASE_URL + `/getData?email=${email}&weekId=${weekId}`)
       .subscribe(
         (response) => {
           console.log(response);
           //this.textStore = [response.json()];
           //this.textSubject.next(this.textStore);
           //this.getFileNames();
-          //this.dataSource = response.json();
+          const result = response.json();
+          this.dataSource = result.plannerData;
         },
         (error) => {
           console.log(`unable to save data with error: ${error}`);
@@ -141,5 +154,9 @@ export class TableComponent {
   getFromChild(value) {
     console.log('mamama');
     console.log(value);
+  }
+
+  getCurrentWeek() {
+    return moment().format('W');
   }
 }

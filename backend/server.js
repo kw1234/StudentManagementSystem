@@ -2,12 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
 const login = require('./services/login');
 const weeklyService = require('./services/weeklyService.js');
 
+const result = dotenv.config();
+
+if (result.error) {
+  throw result.error;
+}
+
 const app = express();
 
-const uri = `mongodb+srv://bgaskwarrier:kaw009020@cluster0-1jamj.mongodb.net/StudentSystem?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.username}:${process.env.password}@cluster0-1jamj.mongodb.net/StudentSystem?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
 
@@ -50,7 +57,7 @@ app.get('/', function (req, res) {
 });
 
 api.post('/postData', weeklyService.postData);
-api.post('/getData', weeklyService.getData);
+api.get('/getData', weeklyService.getData);
 
 auth.post('/login', login.login);
 auth.post('/register', login.register);
