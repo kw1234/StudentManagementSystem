@@ -38,7 +38,6 @@ exports.getData = async function (req, res) {
   const result = await getEntry(req.app.client, email, weekId).catch((error) => {
     res.status(400).end(`Error in the get planner data request: ${error.message}`);
   });
-
   res.send(result);
 };
 
@@ -55,6 +54,7 @@ async function getEntry(client, email, weekId) {
     .db('StudentSystem')
     .collection('PlannerDocs')
     .findOne({ email: email, weekId: weekId });
+  if (!result) return createEmptyEntry();
   return result;
 }
 
@@ -91,4 +91,44 @@ function getLetterGradeAndColor(percentage) {
 
 function getCurrentWeek() {
   return moment().format('W');
+}
+
+function createEmptyEntry() {
+  let entry = [];
+  for (let i = 0; i < 8; i++) {
+    entry.push({
+      class: '',
+      monday: {
+        name: '',
+        type: '',
+        progress: '',
+      },
+      tuesday: {
+        name: '',
+        type: '',
+        progress: '',
+      },
+      wednesday: {
+        name: '',
+        type: '',
+        progress: '',
+      },
+      thursday: {
+        name: '',
+        type: '',
+        progress: '',
+      },
+      friday: {
+        name: '',
+        type: '',
+        progress: '',
+      },
+      letterGrade: '',
+      percentage: '',
+      gradeColor: '',
+      comments: '',
+      todo: '',
+    });
+  }
+  return { plannerData: entry };
 }
