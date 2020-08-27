@@ -39,7 +39,6 @@ exports.getData = async function (req, res) {
     res.status(400).end(`Error in the get planner data request: ${error.message}`);
   });
 
-  if (!result) res.error();
   res.send(result);
 };
 
