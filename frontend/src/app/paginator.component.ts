@@ -4,4 +4,8 @@ import { Component } from '@angular/core';
   selector: 'paginator',
   templateUrl: './paginator.component.html',
 })
-export class PaginatorComponent {}
+export class PaginatorComponent {
+  constructor() {}
+
+  ngOnInit() {}
+}

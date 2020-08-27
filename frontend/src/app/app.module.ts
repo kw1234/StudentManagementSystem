@@ -27,6 +27,7 @@ import { AssignmentComponent } from './assignment.component';
 import { ToolbarComponent } from './toolbar.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
+import { PaginatorComponent } from './paginator.component';
 
 import { TableService } from './table.service';
 import { AuthService } from './auth.service';
@@ -55,6 +56,7 @@ var routes = [
     ToolbarComponent,
     RegisterComponent,
     LoginComponent,
+    PaginatorComponent,
   ],
   imports: [
     BrowserModule,
