@@ -4,13 +4,13 @@ import { AuthService } from './auth.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-'rxjs/add/operator/toPromise';
+('rxjs/add/operator/toPromise');
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 //import 'rxjs/add/operator/map';
 //import {Observable} from 'rxjs/Rx';
 import { timeout } from 'rxjs/operators';
-'rxjs/Rx';
+('rxjs/Rx');
 import { FormControl } from '@angular/forms';
 import { AssignmentComponent } from './assignment.component';
 import * as moment from 'moment';
@@ -54,11 +54,8 @@ export class TableComponent {
     'save',
   ];
 
-  wordData = {
-    word: '',
-  };
+  resultsLength = 52;
 
-  data = {};
   BASE_URL = 'http://localhost:8080/api';
 
   constructor(
