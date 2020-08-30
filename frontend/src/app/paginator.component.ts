@@ -63,6 +63,9 @@ export class PaginatorComponent {
         .add(1, 'd')
         .format('MM/DD/YYYY')
     );
+    // the add here is how the correct sunday date is shown with the week
+    // iso date standards have weeks starting on Monday, so getting this corresponding
+    // date was a pain for many hours.
     return begin
       .day('Saturday')
       .week(this.currWeekId)
