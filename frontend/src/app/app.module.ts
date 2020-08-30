@@ -14,8 +14,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -76,12 +77,13 @@ var routes = [
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatCheckboxModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgbModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [TableService, AuthService],
+  providers: [TableService, AuthService, MatDatepickerModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

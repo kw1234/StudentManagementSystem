@@ -32,6 +32,6 @@ export class PaginatorComponent {
   }
 
   getCurrentDate() {
-    return moment().day('Sunday').week(this.currWeekId).format('MM DD YYYY');
+    return moment().day('Sunday').week(this.currWeekId).format('MM/DD/YYYY');
   }
 }
