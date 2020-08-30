@@ -19,7 +19,7 @@ Unedited Planner
 ![Alt text](pictures/plannerScreenshot2.png)
 
 Filled Out Planner
-![Alt text](pictures/plannerScreenshot2.png)
+![Alt text](pictures/plannerScreenshot.png)
 
 ### Status Report:
 
