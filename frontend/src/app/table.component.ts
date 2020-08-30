@@ -153,6 +153,6 @@ export class TableComponent {
   }
 
   getCurrentWeek() {
-    return parseInt(moment().format('W'));
+    return moment().format('W');
   }
 }
