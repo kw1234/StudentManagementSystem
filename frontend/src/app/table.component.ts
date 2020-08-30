@@ -149,11 +149,10 @@ export class TableComponent {
   }
 
   getFromChild(value) {
-    console.log('mamama');
     console.log(value);
   }
 
   getCurrentWeek() {
-    return moment().format('W');
+    return parseInt(moment().format('W'));
   }
 }

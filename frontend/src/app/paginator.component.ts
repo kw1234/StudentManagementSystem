@@ -22,14 +22,10 @@ export class PaginatorComponent {
   currDate = this.getCurrentDate();
 
   dateClass = (d): MatCalendarCellCssClasses => {
-    const date = d.toDate().getDate();
-    //console.log(parseInt(moment(d.toDate()).format('W')));
+    const date = d.toDate();
+    let begin = moment(date).startOf('week').isoWeekday(1);
 
-    //console.log(this.isSameWeek(date));
-
-    // Highlight the 1st and 20th day of each month.
-    //console.log(this.isSameWeek(date));
-    return this.isSameWeek(d.toDate()) ? 'custom-date-class' : '';
+    return this.isSameWeek(date) ? 'custom-date-class' : '';
   };
 
   myFormGroup: FormGroup;
@@ -53,22 +49,36 @@ export class PaginatorComponent {
   }
 
   getCurrentWeek() {
-    return parseInt(moment().format('W'));
+    let begin = moment().startOf('week').isoWeekday(1);
+    console.log(parseInt(begin.format('W')));
+    return parseInt(begin.format('W'));
   }
 
   getCurrentDate() {
-    return moment().day('Sunday').week(this.currWeekId).format('MM/DD/YYYY');
+    let begin = moment().startOf('week').isoWeekday(1);
+    console.log(
+      moment()
+        .day('Saturday')
+        .week(this.currWeekId)
+        .add(1, 'd')
+        .format('MM/DD/YYYY')
+    );
+    return begin
+      .day('Saturday')
+      .week(this.currWeekId)
+      .add(1, 'd')
+      .format('MM/DD/YYYY');
   }
 
   isSameWeek(date) {
-    console.log(parseInt(moment(date).format('W')));
-    console.log(this.currWeekId);
-    return parseInt(moment(date).format('W')) == this.currWeekId;
+    let begin = moment(date).startOf('week').isoWeekday(1);
+    return parseInt(begin.format('W')) == this.currWeekId;
   }
 
   onDate(event) {
-    console.log(parseInt(event.value.format('W')));
-    this.currWeekId = parseInt(event.value.format('W'));
+    console.log(event);
+    let begin = moment(event.value).startOf('week').isoWeekday(1);
+    this.currWeekId = parseInt(begin.format('W'));
     this.currDate = this.getCurrentDate();
     this.table.getTableData(this.auth.email, this.currWeekId);
   }
