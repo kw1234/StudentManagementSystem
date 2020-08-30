@@ -10,6 +10,7 @@ import * as moment from 'moment';
 })
 export class PaginatorComponent {
   currWeekId = this.getCurrentWeek();
+  currDate = '';
 
   constructor(public table: TableComponent, public auth: AuthService) {}
 
@@ -33,5 +34,11 @@ export class PaginatorComponent {
 
   getCurrentDate() {
     return moment().day('Sunday').week(this.currWeekId).format('MM/DD/YYYY');
+  }
+
+  onDate(event) {
+    console.log(parseInt(event.value.format('W')) + 1);
+    this.currWeekId = parseInt(event.value.format('W')) + 1;
+    this.table.getTableData(this.auth.email, this.currWeekId);
   }
 }
