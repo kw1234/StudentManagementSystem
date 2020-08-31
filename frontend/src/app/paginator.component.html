@@ -14,7 +14,7 @@
       id="dateInput"
       matInput
       [matDatepicker]="picker"
-      [(ngModel)]="currDate"
+      [matDatepickerFilter]="myFilter"
       (dateChange)="onDate($event)"
       style="color: black"
     />

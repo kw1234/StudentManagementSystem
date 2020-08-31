@@ -21,6 +21,12 @@ import * as moment from 'moment';
 export class PaginatorComponent {
   currDate = this.getCurrentDate();
 
+  myFilter = (d): boolean => {
+    const day = d.toDate().getDay();
+    // Only select sunday
+    return day == 0;
+  };
+
   dateClass = (d): MatCalendarCellCssClasses => {
     const date = d.toDate();
     let begin = moment(date).startOf('week').isoWeekday(1);
