@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthService {
@@ -8,6 +9,7 @@ export class AuthService {
   NAME_KEY = 'name';
   EMAIL_KEY = 'email';
   TOKEN_KEY = 'token';
+  currWeekId = parseInt(this.getCurrentWeek());
 
   // added a router to the constructor to do a redirect once someone is authenticated
   constructor(private http: Http, private router: Router) {}
@@ -70,5 +72,9 @@ export class AuthService {
     localStorage.setItem(this.EMAIL_KEY, email);
     // navigating to the home page given authentication is successful
     this.router.navigate(['/']);
+  }
+
+  getCurrentWeek() {
+    return moment().format('W');
   }
 }

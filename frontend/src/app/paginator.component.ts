@@ -18,7 +18,6 @@ import * as moment from 'moment';
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginatorComponent {
-  currWeekId = this.getCurrentWeek();
   currDate = this.getCurrentDate();
 
   dateClass = (d): MatCalendarCellCssClasses => {
@@ -35,17 +34,20 @@ export class PaginatorComponent {
   ngOnInit() {}
 
   leftDecrement() {
-    this.currWeekId = Math.max(0, this.currWeekId - 1);
-    console.log(this.currWeekId);
+    this.auth.currWeekId = Math.max(0, this.auth.currWeekId - 1);
+    console.log(this.auth.currWeekId);
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.currWeekId);
+    this.table.getTableData(this.auth.email, this.auth.currWeekId);
   }
 
   rightIncrement() {
-    this.currWeekId = Math.min(this.getCurrentWeek(), this.currWeekId + 1);
-    console.log(this.currWeekId);
+    this.auth.currWeekId = Math.min(
+      this.getCurrentWeek(),
+      this.auth.currWeekId + 1
+    );
+    console.log(this.auth.currWeekId);
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.currWeekId);
+    this.table.getTableData(this.auth.email, this.auth.currWeekId);
   }
 
   getCurrentWeek() {
@@ -59,7 +61,7 @@ export class PaginatorComponent {
     console.log(
       moment()
         .day('Saturday')
-        .week(this.currWeekId)
+        .week(this.auth.currWeekId)
         .add(1, 'd')
         .format('MM/DD/YYYY')
     );
@@ -68,21 +70,21 @@ export class PaginatorComponent {
     // date was a pain for many hours.
     return begin
       .day('Saturday')
-      .week(this.currWeekId)
+      .week(this.auth.currWeekId)
       .add(1, 'd')
       .format('MM/DD/YYYY');
   }
 
   isSameWeek(date) {
     let begin = moment(date).startOf('week').isoWeekday(1);
-    return parseInt(begin.format('W')) == this.currWeekId;
+    return parseInt(begin.format('W')) == this.auth.currWeekId;
   }
 
   onDate(event) {
     console.log(event);
     let begin = moment(event.value).startOf('week').isoWeekday(1);
-    this.currWeekId = parseInt(begin.format('W'));
+    this.auth.currWeekId = parseInt(begin.format('W'));
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.currWeekId);
+    this.table.getTableData(this.auth.email, this.auth.currWeekId);
   }
 }
