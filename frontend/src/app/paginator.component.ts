@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { TableComponent } from './table.component';
 import { AuthService } from './auth.service';
+import { TableService } from './table.service';
 import {
   FormBuilder,
   FormGroup,
@@ -29,25 +30,32 @@ export class PaginatorComponent {
 
   myFormGroup: FormGroup;
 
-  constructor(public table: TableComponent, public auth: AuthService) {}
+  constructor(
+    public table: TableComponent,
+    public auth: AuthService,
+    public tableService: TableService
+  ) {}
 
   ngOnInit() {}
 
   leftDecrement() {
-    this.auth.currWeekId = Math.max(0, this.auth.currWeekId - 1);
-    console.log(this.auth.currWeekId);
+    this.tableService.currWeekId = Math.max(
+      0,
+      this.tableService.currWeekId - 1
+    );
+    console.log(this.tableService.currWeekId);
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.auth.currWeekId);
+    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
   }
 
   rightIncrement() {
-    this.auth.currWeekId = Math.min(
+    this.tableService.currWeekId = Math.min(
       this.getCurrentWeek(),
-      this.auth.currWeekId + 1
+      this.tableService.currWeekId + 1
     );
-    console.log(this.auth.currWeekId);
+    console.log(this.tableService.currWeekId);
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.auth.currWeekId);
+    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
   }
 
   getCurrentWeek() {
@@ -61,7 +69,7 @@ export class PaginatorComponent {
     console.log(
       moment()
         .day('Saturday')
-        .week(this.auth.currWeekId)
+        .week(this.tableService.currWeekId)
         .add(1, 'd')
         .format('MM/DD/YYYY')
     );
@@ -70,21 +78,21 @@ export class PaginatorComponent {
     // date was a pain for many hours.
     return begin
       .day('Saturday')
-      .week(this.auth.currWeekId)
+      .week(this.tableService.currWeekId)
       .add(1, 'd')
       .format('MM/DD/YYYY');
   }
 
   isSameWeek(date) {
     let begin = moment(date).startOf('week').isoWeekday(1);
-    return parseInt(begin.format('W')) == this.auth.currWeekId;
+    return parseInt(begin.format('W')) == this.tableService.currWeekId;
   }
 
   onDate(event) {
     console.log(event);
     let begin = moment(event.value).startOf('week').isoWeekday(1);
-    this.auth.currWeekId = parseInt(begin.format('W'));
+    this.tableService.currWeekId = parseInt(begin.format('W'));
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.auth.currWeekId);
+    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
   }
 }

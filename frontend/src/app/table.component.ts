@@ -67,7 +67,7 @@ export class TableComponent {
   ngOnInit() {
     //this.dataSource = [];
     console.log(this.auth.email);
-    this.getTableData(this.auth.email, this.auth.getCurrentWeek());
+    this.getTableData(this.auth.email, this.tableService.getCurrentWeek());
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
         class: '',
@@ -112,7 +112,7 @@ export class TableComponent {
     const entry = {
       rows: this.dataSource,
       email: this.auth.email,
-      weekId: String(this.auth.currWeekId),
+      weekId: String(this.tableService.currWeekId),
     };
     this.http.post(this.BASE_URL + '/postData', entry).subscribe(
       (response) => {
@@ -150,9 +150,5 @@ export class TableComponent {
 
   getFromChild(value) {
     console.log(value);
-  }
-
-  getCurrentWeek() {
-    return moment().format('W');
   }
 }

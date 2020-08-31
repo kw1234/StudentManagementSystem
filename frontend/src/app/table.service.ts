@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-'rxjs/add/operator/toPromise';
+('rxjs/add/operator/toPromise');
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 //import 'rxjs/add/operator/map';
 //import {Observable} from 'rxjs/Rx';
 import { timeout } from 'rxjs/operators';
-'rxjs/Rx';
+('rxjs/Rx');
+import * as moment from 'moment';
 
 @Injectable()
 export class TableService {
-  public pageDataStore = [];
+  /*public pageDataStore = [];
   public pageDataSubject = new Subject();
-  pageData = this.pageDataSubject.asObservable();
+  pageData = this.pageDataSubject.asObservable();*/
+  currWeekId = parseInt(this.getCurrentWeek());
 
   constructor(private http: Http) {}
 
@@ -22,24 +24,10 @@ export class TableService {
 
   saveData(data) {
     console.log(data);
-    this.http.post(this.BASE_URL + '/saveData', data).subscribe(
-      (response) => {
-        console.log(response);
-        //this.textStore = [response.json()];
-        //this.textSubject.next(this.textStore);
-        //this.getFileNames();
-        this.pageDataStore = response.json();
-        this.pageDataSubject.next(this.pageDataStore);
-        //console.log(response.json());
-        data = response.json();
-      },
-      (error) => {
-        console.log(`unable to save data with error: ${error}`);
-      }
-    );
+    this.http.post(this.BASE_URL + '/saveData', data).subscribe();
   }
 
-  getData() {
-    return this.pageDataStore;
+  getCurrentWeek() {
+    return moment().format('W');
   }
 }
