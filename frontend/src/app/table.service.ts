@@ -14,11 +14,11 @@ export class TableService {
   /*public pageDataStore = [];
   public pageDataSubject = new Subject();
   pageData = this.pageDataSubject.asObservable();*/
-  currWeekId = parseInt(this.getCurrentWeek());
+  currWeekId = parseInt(this.getCurrentWeek()) - 1;
 
   constructor(private http: Http) {}
 
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
 
   loading = false;
 
@@ -29,5 +29,10 @@ export class TableService {
 
   getCurrentWeek() {
     return moment().format('W');
+  }
+
+  setWeekId() {
+    if (moment().day() == 0) return parseInt(moment().format('W'));
+    return parseInt(moment().format('W')) - 1;
   }
 }

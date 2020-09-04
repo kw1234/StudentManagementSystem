@@ -56,7 +56,7 @@ export class TableComponent {
 
   resultsLength = 52;
 
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
 
   constructor(
     public tableService: TableService,
@@ -67,7 +67,10 @@ export class TableComponent {
   ngOnInit() {
     //this.dataSource = [];
     console.log(this.auth.email);
-    this.getTableData(this.auth.email, this.tableService.getCurrentWeek());
+    this.getTableData(
+      this.auth.email,
+      String(parseInt(this.tableService.getCurrentWeek()) - 1)
+    );
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
         class: '',
