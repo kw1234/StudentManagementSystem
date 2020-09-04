@@ -52,9 +52,9 @@ app.use((req, res, next) => {
 const api = express.Router();
 const auth = express.Router();
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
   res.send('hello');
-});
+});*/
 
 api.post('/postData', weeklyService.postData);
 api.get('/getData', weeklyService.getData);
