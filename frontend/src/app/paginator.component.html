@@ -11,12 +11,11 @@
   <mat-form-field>
     <mat-label>Week: {{ currDate }} </mat-label>
     <input
-      id="dateInput"
       matInput
+      [(ngModel)]="currDate"
       [matDatepicker]="picker"
       [matDatepickerFilter]="myFilter"
       (dateChange)="onDate($event)"
-      style="color: black"
     />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="dateClass" #picker> </mat-datepicker>

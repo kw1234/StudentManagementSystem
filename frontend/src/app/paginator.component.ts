@@ -56,18 +56,12 @@ export class PaginatorComponent {
 
   rightIncrement() {
     this.tableService.currWeekId = Math.min(
-      this.getCurrentWeek(),
+      parseInt(this.tableService.getCurrentWeek()) - 1,
       this.tableService.currWeekId + 1
     );
     console.log(this.tableService.currWeekId);
     this.currDate = this.getCurrentDate();
     this.table.getTableData(this.auth.email, this.tableService.currWeekId);
-  }
-
-  getCurrentWeek() {
-    let begin = moment().startOf('week').isoWeekday(1);
-    console.log(parseInt(begin.format('W')));
-    return parseInt(begin.format('W'));
   }
 
   getCurrentDate() {
