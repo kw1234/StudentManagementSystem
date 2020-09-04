@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  BASE_URL = 'http://localhost:8080/auth';
+  BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/auth';
   NAME_KEY = 'name';
   EMAIL_KEY = 'email';
   TOKEN_KEY = 'token';
