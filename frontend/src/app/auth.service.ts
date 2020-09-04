@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/auth';
+  //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/auth';
+  BASE_URL = 'http://localhost:8080/auth';
   NAME_KEY = 'name';
   EMAIL_KEY = 'email';
   TOKEN_KEY = 'token';
+  ROLE_KEY = 'role';
 
   // added a router to the constructor to do a redirect once someone is authenticated
   constructor(private http: Http, private router: Router) {}
@@ -22,6 +24,10 @@ export class AuthService {
 
   get email() {
     return localStorage.getItem(this.EMAIL_KEY);
+  }
+
+  get role() {
+    return localStorage.getItem(this.ROLE_KEY);
   }
 
   get isAuthenticated() {
@@ -54,6 +60,7 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.NAME_KEY);
     localStorage.removeItem(this.EMAIL_KEY);
+    localStorage.removeItem(this.ROLE_KEY);
     window.location.replace('/');
   }
 
@@ -68,7 +75,18 @@ export class AuthService {
     localStorage.setItem(this.TOKEN_KEY, authResponse.token);
     localStorage.setItem(this.NAME_KEY, authResponse.firstName);
     localStorage.setItem(this.EMAIL_KEY, email);
+    localStorage.setItem(this.ROLE_KEY, authResponse.role);
     // navigating to the home page given authentication is successful
     this.router.navigate(['/']);
+  }
+
+  canViewTutorlist() {
+    const role = localStorage.getItem(this.ROLE_KEY);
+    return role == 'admin';
+  }
+
+  canViewStudentList() {
+    const role = localStorage.getItem(this.ROLE_KEY);
+    return role == 'admin' || role == 'tutor';
   }
 }

@@ -54,9 +54,8 @@ export class TableComponent {
     'save',
   ];
 
-  resultsLength = 52;
-
-  BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
+  //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
+  BASE_URL = 'http://localhost:8080/api';
 
   constructor(
     public tableService: TableService,

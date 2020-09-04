@@ -11,7 +11,10 @@ exports.register = async function (req, res) {
     lastName: req.body.lastName,
     email: req.body.email,
     password: encryptedPassword,
+    role: req.body.role,
   };
+
+  console.log(user);
 
   // add the user info to the database
   postUser(res, req.app.client, user).catch((error) => {
@@ -69,6 +72,7 @@ async function postUser(res, client, user) {
 
 async function getUser(client, email) {
   const result = await client.db('StudentSystem').collection('Users').findOne({ email: email });
+  console.log(result);
   return result;
 }
 
@@ -76,7 +80,7 @@ function sendToken(res, user) {
   // usually, would not hardcode this secret (the second param in the jwt.sign() call)
   // but, not sure how else to keep this secret so keeping it here for now
   const token = jwt.sign(user.email, '123');
-  res.json({ firstName: user.firstName, token });
+  res.json({ firstName: user.firstName, token, role: user.role });
 }
 
 function sendAuthError(res) {
