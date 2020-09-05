@@ -49,7 +49,6 @@ export class PaginatorComponent {
       0,
       this.tableService.currWeekId - 1
     );
-    console.log(this.tableService.currWeekId);
     this.currDate = this.getCurrentDate();
     this.table.getTableData(this.auth.email, this.tableService.currWeekId);
   }
@@ -59,23 +58,12 @@ export class PaginatorComponent {
       parseInt(this.tableService.getCurrentWeek()) - 1,
       this.tableService.currWeekId + 1
     );
-    console.log(this.tableService.currWeekId);
     this.currDate = this.getCurrentDate();
     this.table.getTableData(this.auth.email, this.tableService.currWeekId);
   }
 
   getCurrentDate() {
     let begin = moment().startOf('week').isoWeekday(1);
-    console.log(
-      moment()
-        .day('Saturday')
-        .week(this.tableService.currWeekId)
-        .add(1, 'd')
-        .format('MM/DD/YYYY')
-    );
-    // the add here is how the correct sunday date is shown with the week
-    // iso date standards have weeks starting on Monday, so getting this corresponding
-    // date was a pain for many hours.
     return begin
       .day('Saturday')
       .week(this.tableService.currWeekId)
@@ -89,7 +77,6 @@ export class PaginatorComponent {
   }
 
   onDate(event) {
-    console.log(event);
     let begin = moment(event.value).startOf('week').isoWeekday(1);
     this.tableService.currWeekId = parseInt(begin.format('W'));
     this.currDate = this.getCurrentDate();

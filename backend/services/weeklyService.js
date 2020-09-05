@@ -14,7 +14,6 @@ const plannerSchema = {
 
 exports.postData = async function (req, res) {
   const body = req.body;
-  console.log(body);
   let rows = body.rows;
   const email = body.email;
   const weekId = body.weekId;
@@ -33,7 +32,6 @@ exports.getData = async function (req, res) {
   const query = req.query;
   const email = query.email;
   const weekId = query.weekId;
-  console.log(email + ' ' + weekId);
 
   const result = await getEntry(req.app.client, email, weekId).catch((error) => {
     res.status(400).end(`Error in the get planner data request: ${error.message}`);
@@ -74,7 +72,6 @@ function formatRows(rows) {
 }
 
 function getLetterGradeAndColor(percentage) {
-  console.log(percentage);
   if (percentage >= 92.5) return ['A', 'green'];
   if (percentage >= 89.5) return ['A-', 'green'];
   if (percentage >= 86.5) return ['B+', 'lightgreen'];

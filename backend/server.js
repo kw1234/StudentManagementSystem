@@ -58,8 +58,8 @@ const auth = express.Router();
 
 api.post('/postData', weeklyService.postData);
 api.get('/getData', weeklyService.getData);
-api.get('/users/me', checkAuthenticated, login.getUserProfile);
-api.post('/users/me', checkAuthenticated, login.editUserProfile);
+api.get('/user/me', checkAuthenticated, login.getUserProfile);
+api.post('/user/me', checkAuthenticated, login.editUserProfile);
 
 auth.post('/login', login.login);
 auth.post('/register', login.register);

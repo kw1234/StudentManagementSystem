@@ -14,8 +14,6 @@ exports.register = async function (req, res) {
     role: req.body.role,
   };
 
-  console.log(user);
-
   // add the user info to the database
   postUser(res, req.app.client, user).catch((error) => {
     res.status(400).end(`Error in the register request: ${error.message}`);
@@ -36,32 +34,30 @@ exports.login = async function (req, res) {
     if (comparison) {
       sendToken(res, user);
     } else {
-      sendAuthError(res);
+      sendAuthError(res, 'failure to login, email or password did not match');
     }
   } else {
-    sendAuthError(res);
+    sendAuthError(res, 'user was not found');
   }
 };
 
 exports.editUserProfile = async function (req, res) {
   const email = req.body.email;
+  const role = req.body.role;
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: email,
-    role: req.body.role,
   };
 
-  console.log(user);
-
-  editUser(req.app.client, email, user).catch((error) => {
+  editUser(req.app.client, { email }, user).catch((error) => {
     res.status(400).end(`Error in the post planner data request: ${error.message}`);
   });
   res.status(200);
 };
 
 exports.getUserProfile = async function (req, res) {
-  const { email } = req.body;
+  const query = req.query;
+  const email = query.email;
 
   const user = await getUser(req.app.client, email).catch((error) => {
     res.status(400).end(`Error in the login request: ${error.message}`);
@@ -70,7 +66,7 @@ exports.getUserProfile = async function (req, res) {
   if (user) {
     res.send(user);
   } else {
-    sendAuthError(res);
+    sendAuthError(res, 'user profile was not found');
   }
 };
 
@@ -81,12 +77,12 @@ async function postUser(res, client, user) {
 }
 
 async function getUser(client, email) {
-  const result = await client.db('StudentSystem').collection('Users').findOne({ email: email });
-  console.log(result);
+  const result = await client.db('StudentSystem').collection('Users').findOne({ email });
   return result;
 }
 
 async function editUser(client, key, val) {
+  console.log(key, val.firstName, val.lastName, val.role);
   await client.db('StudentSystem').collection('Users').update(key, { $set: val });
   console.log(`User ${key} was edited`);
 }
@@ -98,7 +94,7 @@ function sendToken(res, user) {
   res.json({ firstName: user.firstName, token, role: user.role });
 }
 
-function sendAuthError(res) {
+function sendAuthError(res, message) {
   console.log('error in auth');
-  return res.json({ success: false, message: 'email or password incorrect' });
+  return res.json({ success: false, message });
 }

@@ -29,6 +29,7 @@ import { ToolbarComponent } from './toolbar.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { PaginatorComponent } from './paginator.component';
+import { UserComponent } from './user.component';
 
 import { TableService } from './table.service';
 import { AuthService } from './auth.service';
@@ -47,6 +48,10 @@ var routes = [
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'user',
+    component: UserComponent,
+  },
 ];
 
 @NgModule({
@@ -58,6 +63,7 @@ var routes = [
     RegisterComponent,
     LoginComponent,
     PaginatorComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
