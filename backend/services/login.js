@@ -41,27 +41,37 @@ exports.login = async function (req, res) {
   } else {
     sendAuthError(res);
   }
-
-  // do a get from the database and decrypt the encrypted password stored there
-  // if the password matches, send an authentication token
-  // if it does not match, send an auth error
 };
 
-exports.saveUser = async function (req, res) {
+exports.editUserProfile = async function (req, res) {
+  const email = req.body.email;
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email,
+    email: email,
+    role: req.body.role,
   };
 
   console.log(user);
-  // this is a put of an existing users info
+
+  editUser(req.app.client, email, user).catch((error) => {
+    res.status(400).end(`Error in the post planner data request: ${error.message}`);
+  });
+  res.status(200);
 };
 
-exports.editUser = async function (req, res) {
-  const email = req.user;
+exports.getUserProfile = async function (req, res) {
+  const { email } = req.body;
 
-  // this is a get of an existing users info that populates the user info view with information on init
+  const user = await getUser(req.app.client, email).catch((error) => {
+    res.status(400).end(`Error in the login request: ${error.message}`);
+  });
+
+  if (user) {
+    res.send(user);
+  } else {
+    sendAuthError(res);
+  }
 };
 
 async function postUser(res, client, user) {
@@ -74,6 +84,11 @@ async function getUser(client, email) {
   const result = await client.db('StudentSystem').collection('Users').findOne({ email: email });
   console.log(result);
   return result;
+}
+
+async function editUser(client, key, val) {
+  await client.db('StudentSystem').collection('Users').update(key, { $set: val });
+  console.log(`User ${key} was edited`);
 }
 
 function sendToken(res, user) {

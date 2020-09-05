@@ -58,6 +58,8 @@ const auth = express.Router();
 
 api.post('/postData', weeklyService.postData);
 api.get('/getData', weeklyService.getData);
+api.get('/users/me', checkAuthenticated, login.getUserProfile);
+api.post('/users/me', checkAuthenticated, login.editUserProfile);
 
 auth.post('/login', login.login);
 auth.post('/register', login.register);
@@ -71,9 +73,9 @@ function checkAuthenticated(req, res, next) {
   const payload = jwt.decode(token, '123');
 
   if (!payload) {
-    return res
-      .status(401)
-      .send({ message: 'Unauthorized request. Authentication header is invalid' });
+    return res.status(401).send({
+      message: 'Unauthorized request. Authentication header is invalid',
+    });
   }
 
   req.user = payload;
