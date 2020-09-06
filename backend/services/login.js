@@ -84,7 +84,7 @@ async function getUser(client, email) {
 async function editUser(client, key, val) {
   console.log(key, val.firstName, val.lastName, val.role);
   await client.db('StudentSystem').collection('Users').update(key, { $set: val });
-  console.log(`User ${key} was edited`);
+  console.log(`User ${key.email} was edited`);
 }
 
 function sendToken(res, user) {
