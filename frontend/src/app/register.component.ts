@@ -15,6 +15,7 @@ export class RegisterComponent {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, emailValid()]],
+        role: ['', [Validators.required, roleValid()]],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
@@ -46,5 +47,12 @@ function emailValid() {
   return (control) => {
     var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(control.value) ? null : { invalidEmail: true };
+  };
+}
+
+function roleValid() {
+  return (control) => {
+    const roles = ['student', 'tutor', 'admin'];
+    return roles.includes(String(control.value).toLowerCase());
   };
 }

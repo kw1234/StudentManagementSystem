@@ -29,7 +29,9 @@ import { ToolbarComponent } from './toolbar.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { PaginatorComponent } from './paginator.component';
-import { UserComponent } from './user.component';
+import { EditUserComponent } from './edituser.component';
+import { StudentListItemComponent } from './student.list.item.component';
+import { TutorListItemComponent } from './tutor.list.item.component';
 
 import { TableService } from './table.service';
 import { AuthService } from './auth.service';
@@ -50,7 +52,15 @@ var routes = [
   },
   {
     path: 'user',
-    component: UserComponent,
+    component: EditUserComponent,
+  },
+  {
+    path: 'studentList',
+    component: StudentListItemComponent,
+  },
+  {
+    path: 'tutorList',
+    component: TutorListItemComponent,
   },
 ];
 
@@ -63,7 +73,9 @@ var routes = [
     RegisterComponent,
     LoginComponent,
     PaginatorComponent,
-    UserComponent,
+    EditUserComponent,
+    StudentListItemComponent,
+    TutorListItemComponent,
   ],
   imports: [
     BrowserModule,
