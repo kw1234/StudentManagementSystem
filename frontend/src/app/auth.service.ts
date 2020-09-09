@@ -68,7 +68,7 @@ export class AuthService {
     console.log(res);
     console.log(email);
     // adding authentication code to redirect the route to home page if authentication is successful
-    var authResponse = res.json();
+    let authResponse = res.json();
 
     if (!authResponse.token) return;
     console.log(authResponse);
@@ -77,7 +77,16 @@ export class AuthService {
     localStorage.setItem(this.EMAIL_KEY, email);
     localStorage.setItem(this.ROLE_KEY, authResponse.role);
     // navigating to the home page given authentication is successful
-    this.router.navigate(['/']);
+    const role = localStorage.getItem(this.ROLE_KEY);
+    if (role == 'admin') {
+      this.router.navigate(['/tutorList']);
+    } else if (role == 'tutor') {
+      this.router.navigate(['/studentList']);
+    } else if (role == 'student') {
+      this.router.navigate(['/']);
+    } else {
+      this.logout();
+    }
   }
 
   canViewTutorlist() {
