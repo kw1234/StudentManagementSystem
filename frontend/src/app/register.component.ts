@@ -29,6 +29,22 @@ export class RegisterComponent {
   }
 
   isValid(control) {
+    if (control == 'email') {
+      console.log(
+        'email ' +
+          this.form.controls[control].invalid +
+          ' ' +
+          this.form.controls[control].touched
+      );
+    }
+    if (control == 'role') {
+      console.log(
+        'role ' +
+          this.form.controls[control].invalid +
+          ' ' +
+          this.form.controls[control].touched
+      );
+    }
     return (
       this.form.controls[control].invalid && this.form.controls[control].touched
     );
@@ -45,7 +61,7 @@ function matchingFields(field1, field2) {
 
 function emailValid() {
   return (control) => {
-    var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(control.value) ? null : { invalidEmail: true };
   };
 }

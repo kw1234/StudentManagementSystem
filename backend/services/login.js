@@ -14,10 +14,14 @@ exports.register = async function (req, res) {
     role: req.body.role,
   };
 
-  // add the user info to the database
-  postUser(res, req.app.client, user).catch((error) => {
-    res.status(400).end(`Error in the register request: ${error.message}`);
-  });
+  if (!validateUser(user)) {
+    res.status(400).end('Error in the register request: email or role entry was not valid');
+  } else {
+    // add the user info to the database
+    postUser(res, req.app.client, user).catch((error) => {
+      res.status(400).end(`Error in the register request: ${error.message}`);
+    });
+  }
 };
 
 exports.login = async function (req, res) {
@@ -97,4 +101,18 @@ function sendToken(res, user) {
 function sendAuthError(res, message) {
   console.log('error in auth');
   return res.json({ success: false, message });
+}
+
+function validateUser(user) {
+  return emailValid(user.email) && roleValid(user.role);
+}
+
+function emailValid(email) {
+  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return email !== '' && regex.test(email);
+}
+
+function roleValid(role) {
+  const roles = ['student', 'tutor', 'admin'];
+  return roles.includes(String(role).toLowerCase());
 }
