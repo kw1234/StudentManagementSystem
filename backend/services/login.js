@@ -5,19 +5,25 @@ exports.register = async function (req, res) {
   const { password } = req.body;
   const saltRounds = 10;
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
+  const role = req.body.role;
 
   const user = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     password: encryptedPassword,
-    role: req.body.role,
+    role,
   };
 
   if (!validateUser(user)) {
     res.status(400).end('Error in the register request: email or role entry was not valid');
   } else {
     // add the user info to the database
+    if (role === 'admin') {
+      user.tutorList = [];
+    } else if (role === 'tutor') {
+      user.studentList = [];
+    }
     postUser(res, req.app.client, user).catch((error) => {
       res.status(400).end(`Error in the register request: ${error.message}`);
     });
