@@ -39,7 +39,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 var routes = [
   {
-    path: '',
+    path: 'weeklyPlanner',
     component: TableComponent,
   },
   {

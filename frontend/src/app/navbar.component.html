@@ -3,8 +3,18 @@
     <mat-icon>menu</mat-icon>
   </button>
   <div style="padding: 5px">Student System</div>
-  <button mat-button routerLink="/">Weekly Planner</button>
-  <button mat-button routerLink="/report">Status Report</button>
+  <button *ngIf="auth.role == 'student'" mat-button routerLink="/weeklyPlanner">
+    Weekly Planner
+  </button>
+  <button *ngIf="auth.role == 'student'" mat-button routerLink="/studentReport">
+    Status Report
+  </button>
+  <button *ngIf="auth.role == 'tutor'" mat-button routerLink="/studentList">
+    Student List
+  </button>
+  <button *ngIf="auth.role == 'admin'" mat-button routerLink="/tutorList">
+    Tutor List
+  </button>
   <span style="flex: 1 1 auto"></span>
   <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/login">
     Login

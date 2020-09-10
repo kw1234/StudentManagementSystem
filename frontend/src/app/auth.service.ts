@@ -83,7 +83,7 @@ export class AuthService {
     } else if (role == 'tutor') {
       this.router.navigate(['/studentList']);
     } else if (role == 'student') {
-      this.router.navigate(['/']);
+      this.router.navigate(['/weeklyPlanner']);
     } else {
       this.logout();
     }
