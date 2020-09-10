@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
 
 import { TableComponent } from './table.component';
 import { AssignmentComponent } from './assignment.component';
-import { ToolbarComponent } from './toolbar.component';
+import { NavbarComponent } from './navbar.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { PaginatorComponent } from './paginator.component';
@@ -69,7 +69,7 @@ var routes = [
     AppComponent,
     TableComponent,
     AssignmentComponent,
-    ToolbarComponent,
+    NavbarComponent,
     RegisterComponent,
     LoginComponent,
     PaginatorComponent,

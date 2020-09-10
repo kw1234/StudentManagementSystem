@@ -9,22 +9,22 @@ import { TableService } from './table.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-'rxjs/add/operator/toPromise';
+('rxjs/add/operator/toPromise');
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 //import 'rxjs/add/operator/map';
 //import {Observable} from 'rxjs/Rx';
 import { timeout } from 'rxjs/operators';
-'rxjs/Rx';
+('rxjs/Rx');
 import { FormControl } from '@angular/forms';
 import { AuthService } from './auth.service';
 
 @Component({
-  selector: 'toolbar',
-  templateUrl: './toolbar.component.html',
+  selector: 'navbar',
+  templateUrl: './navbar.component.html',
   styleUrls: ['table.css'],
 })
-export class ToolbarComponent {
+export class NavbarComponent {
   constructor(public tableService: TableService, public auth: AuthService) {}
 
   ngOnInit() {}
