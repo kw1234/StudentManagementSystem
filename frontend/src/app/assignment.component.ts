@@ -9,13 +9,11 @@ import { TableService } from './table.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-'rxjs/add/operator/toPromise';
+('rxjs/add/operator/toPromise');
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-//import 'rxjs/add/operator/map';
-//import {Observable} from 'rxjs/Rx';
 import { timeout } from 'rxjs/operators';
-'rxjs/Rx';
+('rxjs/Rx');
 import { FormControl } from '@angular/forms';
 
 import {
@@ -56,8 +54,6 @@ export class AssignmentComponent {
   BASE_URL = 'http://localhost:8080/api';
 
   constructor(public tableService: TableService, private http: Http) {}
-
-  //when: (index: number, rowData: T) => boolean;
 
   ngOnInit() {
     this.selections = [];

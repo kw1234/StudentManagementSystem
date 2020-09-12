@@ -30,6 +30,7 @@ import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { PaginatorComponent } from './paginator.component';
 import { EditUserComponent } from './edituser.component';
+import { StudentListComponent } from './student.list.component';
 import { StudentListItemComponent } from './student.list.item.component';
 import { TutorListItemComponent } from './tutor.list.item.component';
 
@@ -56,7 +57,7 @@ var routes = [
   },
   {
     path: 'studentList',
-    component: StudentListItemComponent,
+    component: StudentListComponent,
   },
   {
     path: 'tutorList',
@@ -74,6 +75,7 @@ var routes = [
     LoginComponent,
     PaginatorComponent,
     EditUserComponent,
+    StudentListComponent,
     StudentListItemComponent,
     TutorListItemComponent,
   ],
