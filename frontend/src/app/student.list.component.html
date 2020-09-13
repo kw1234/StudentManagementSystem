@@ -1,0 +1,10 @@
+<h1>List of Students</h1>
+>
+<mat-form-field>
+  <input matInput placeholder="Student Email" [(ngModel)]="email" />
+</mat-form-field>
+<button (click)="addStudent()">Add Student</button>
+<student-list-item
+  *ngFor="let student of studentList; index as i"
+  [email]="studentList[i]"
+></student-list-item>
