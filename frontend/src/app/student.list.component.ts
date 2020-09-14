@@ -14,6 +14,8 @@ export class StudentListComponent {
 
   studentList = [];
   email;
+  firstName;
+  lastName;
 
   ngOnInit() {
     this.http
@@ -32,7 +34,11 @@ export class StudentListComponent {
     // Here you can specify the data
     console.log(this.studentList);
     console.log(this.email);
-    this.studentList.push(this.email);
+    this.studentList.push({
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+    });
     const entry = {
       email: this.auth.email,
       studentList: this.studentList,

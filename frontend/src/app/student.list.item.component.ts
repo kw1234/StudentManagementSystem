@@ -13,6 +13,8 @@ export class StudentListItemComponent {
   constructor(private http: Http, private auth: AuthService) {}
 
   @Input() email: string;
+  @Input() firstName: string;
+  @Input() lastName: string;
   model = { firstName: '', lastName: '', email: '' };
 
   ngOnInit() {}
