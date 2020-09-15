@@ -8,6 +8,7 @@ export class AuthService {
   BASE_URL = 'http://localhost:8080/auth';
   NAME_KEY = 'name';
   EMAIL_KEY = 'email';
+  PLANNER_EMAIL_KEY = 'plannerEmail';
   TOKEN_KEY = 'token';
   ROLE_KEY = 'role';
 
@@ -24,6 +25,10 @@ export class AuthService {
 
   get email() {
     return localStorage.getItem(this.EMAIL_KEY);
+  }
+
+  get plannerEmail() {
+    return localStorage.getItem(this.PLANNER_EMAIL_KEY);
   }
 
   get role() {
@@ -61,6 +66,7 @@ export class AuthService {
     localStorage.removeItem(this.NAME_KEY);
     localStorage.removeItem(this.EMAIL_KEY);
     localStorage.removeItem(this.ROLE_KEY);
+    localStorage.removeItem(this.PLANNER_EMAIL_KEY);
     window.location.replace('/');
   }
 
@@ -83,10 +89,16 @@ export class AuthService {
     } else if (role == 'tutor') {
       this.router.navigate(['/studentList']);
     } else if (role == 'student') {
+      localStorage.setItem(this.PLANNER_EMAIL_KEY, email);
       this.router.navigate(['/weeklyPlanner']);
     } else {
       this.logout();
     }
+  }
+
+  tutorViewPlanner(email) {
+    localStorage.setItem(this.PLANNER_EMAIL_KEY, email);
+    this.router.navigate(['/weeklyPlanner']);
   }
 
   canViewTutorlist() {

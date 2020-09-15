@@ -50,7 +50,10 @@ export class PaginatorComponent {
       this.tableService.currWeekId - 1
     );
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
+    this.table.getTableData(
+      this.auth.plannerEmail,
+      this.tableService.currWeekId
+    );
   }
 
   rightIncrement() {
@@ -59,7 +62,10 @@ export class PaginatorComponent {
       this.tableService.currWeekId + 1
     );
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
+    this.table.getTableData(
+      this.auth.plannerEmail,
+      this.tableService.currWeekId
+    );
   }
 
   getCurrentDate() {
@@ -80,6 +86,9 @@ export class PaginatorComponent {
     let begin = moment(event.value).startOf('week').isoWeekday(1);
     this.tableService.currWeekId = parseInt(begin.format('W'));
     this.currDate = this.getCurrentDate();
-    this.table.getTableData(this.auth.email, this.tableService.currWeekId);
+    this.table.getTableData(
+      this.auth.plannerEmail,
+      this.tableService.currWeekId
+    );
   }
 }

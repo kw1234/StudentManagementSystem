@@ -22,6 +22,10 @@ export class StudentListItemComponent {
 
   ngOnInit() {}
 
+  goToWeeklyPlanner() {
+    this.auth.tutorViewPlanner(this.email);
+  }
+
   delete() {
     /*const prom = new Promise(function (resolve, reject) {
       this.http
