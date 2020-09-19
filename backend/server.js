@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const login = require('./services/login');
 const weeklyService = require('./services/weeklyService.js');
 const tutorService = require('./services/tutorService.js');
+const adminService = require('./services/adminService.js');
 
 const result = dotenv.config();
 
@@ -61,6 +62,8 @@ api.post('/postData', weeklyService.postData);
 api.get('/getData', weeklyService.getData);
 api.post('/tutor/updateStudentList', tutorService.updateStudentList);
 api.get('/tutor/getStudents', tutorService.getStudents);
+api.post('/admin/updateTutorList', adminService.updateTutorList);
+api.get('/admin/getTutors', adminService.getTutors);
 api.get('/user/me', checkAuthenticated, login.getUserProfile);
 api.post('/user/me', checkAuthenticated, login.editUserProfile);
 

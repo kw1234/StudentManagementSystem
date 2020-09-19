@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'studentlist',
+  selector: 'student-list',
   templateUrl: 'student.list.component.html',
 })
 export class StudentListComponent {

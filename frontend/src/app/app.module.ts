@@ -32,6 +32,7 @@ import { PaginatorComponent } from './paginator.component';
 import { EditUserComponent } from './edituser.component';
 import { StudentListComponent } from './student.list.component';
 import { StudentListItemComponent } from './student.list.item.component';
+import { TutorListComponent } from './tutor.list.component';
 import { TutorListItemComponent } from './tutor.list.item.component';
 
 import { TableService } from './table.service';
@@ -39,6 +40,10 @@ import { AuthService } from './auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 var routes = [
+  {
+    path: '',
+    component: TableComponent,
+  },
   {
     path: 'weeklyPlanner',
     component: TableComponent,
@@ -61,7 +66,7 @@ var routes = [
   },
   {
     path: 'tutorList',
-    component: TutorListItemComponent,
+    component: TutorListComponent,
   },
 ];
 
@@ -77,6 +82,7 @@ var routes = [
     EditUserComponent,
     StudentListComponent,
     StudentListItemComponent,
+    TutorListComponent,
     TutorListItemComponent,
   ],
   imports: [
