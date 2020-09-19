@@ -1,0 +1,18 @@
+<h1>List of Tutors</h1>
+>
+<mat-form-field>
+  <input matInput placeholder="Tutor Email" [(ngModel)]="email" />
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="First Name" [(ngModel)]="firstName" />
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Last Name" [(ngModel)]="lastName" />
+</mat-form-field>
+<button (click)="addTutor()">Add Tutor</button>
+<tutor-list-item
+  *ngFor="let tutor of tutorList; index as i"
+  [email]="tutorList[i].email"
+  [firstName]="tutorList[i].firstName"
+  [lastName]="tutorList[i].lastName"
+></tutor-list-item>
