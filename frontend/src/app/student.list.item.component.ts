@@ -27,14 +27,6 @@ export class StudentListItemComponent {
   }
 
   delete() {
-    /*const prom = new Promise(function (resolve, reject) {
-      this.http
-        .get(this.BASE_URL + `/tutor/getStudents?email=${this.auth.email}`)
-        .subscribe((response) => {
-          console.log(response.json().studentList);
-          this.studentList = response.json().studentList;
-        });
-    });*/
     const tutorEmail = this.auth.email;
     this.http
       .get(this.BASE_URL + `/tutor/getStudents?email=${tutorEmail}`)
@@ -54,15 +46,6 @@ export class StudentListItemComponent {
         return entry;
       })
       .then((entry) => this.updateHelper(entry));
-    /*.then(function (result) {
-        // (**
-        const studentList = result.json().studentList;
-        const entry = {
-          email: tutorEmail,
-          studentList,
-        };
-        this.updateHelper(entry);
-      });*/
   }
 
   updateHelper(entry) {
@@ -70,12 +53,7 @@ export class StudentListItemComponent {
     this.http.post(this.BASE_URL + '/tutor/updateStudentList', entry).subscribe(
       (response) => {
         console.log(response.json());
-        //console.log(response);
-        //this.textStore = [response.json()];
-        //this.textSubject.next(this.textStore);
-        //this.getFileNames();
         const result = response.json();
-        //this.studentList = result.studentList;
       },
       (error) => {
         console.log(

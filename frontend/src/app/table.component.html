@@ -1,7 +1,10 @@
 <div>
   <paginator></paginator>
   <span style="flex: 1 1 auto"></span>
-  <dialog-button></dialog-button>
+  <dialog-button
+    (sendToParent)="getFromChild($event)"
+    [dataSource]="dataSource"
+  ></dialog-button>
 </div>
 <div style="position: relative; min-height: 200px">
   <mat-table

@@ -57,7 +57,6 @@ export class TableComponent {
   ) {}
 
   ngOnInit() {
-    //this.dataSource = [];
     console.log(this.auth.plannerEmail);
     this.getTableData(
       this.auth.plannerEmail,
@@ -103,7 +102,6 @@ export class TableComponent {
   saveData(data) {}
 
   tableInput() {
-    console.log(this.dataSource);
     const entry = {
       rows: this.dataSource,
       email: this.auth.plannerEmail,
@@ -125,7 +123,6 @@ export class TableComponent {
   }
 
   getTableData(email, weekId) {
-    console.log(this.dataSource);
     this.http
       .get(this.BASE_URL + `/getData?email=${email}&weekId=${weekId}`)
       .subscribe(

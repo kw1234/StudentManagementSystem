@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -18,28 +18,45 @@ export interface DialogData {
   templateUrl: 'dialog-button.component.html',
 })
 export class DialogButtonComponent {
+  @Input() dataSource: Object[] = [];
+  @Output() public onDialogClose: EventEmitter<any> = new EventEmitter();
   classList: string[];
   name: string;
 
-  constructor(public dialog: MatDialog) {
-    this.name = 'laaaa';
-    this.classList = ['', '', '', '', '', '', '', ''];
-  }
+  constructor(public dialog: MatDialog) {}
 
-  onInit() {
+  ngOnInit() {
+    console.log(this.dataSource);
+    this.classList = [];
+    for (let i = 0; i < 8; i++) {
+      this.classList.push(this.dataSource[i]['class']);
+    }
+    console.log(this.classList);
+    /*this.classList = this.classList
+      ? this.classList
+      : ['', '', '', '', '', '', '', ''];*/
     this.name = 'laaaa';
   }
 
   openDialog(): void {
     console.log(this.name);
+    console.log(this.classList);
+    for (let i = 0; i < 8; i++) {
+      this.classList[i] = this.dataSource[i]['class'];
+    }
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: { name: this.name, classList: this.classList },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
       console.log('The dialog was closed');
-      this.classList = result;
+      this.classList = result ? result : this.classList;
+      for (let i = 0; i < 8; i++) {
+        this.dataSource[i]['class'] = this.classList[i];
+      }
+      console.log(this.dataSource);
     });
   }
 }
@@ -53,9 +70,14 @@ export class DialogComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+  ) {
+    console.log(data);
+  }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    console.log('bum');
+    console.log(this.data);
+    this.data.classList = this.data.classList;
+    //this.dialogRef.close();
   }
 }
