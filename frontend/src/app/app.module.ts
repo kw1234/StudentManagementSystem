@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 import { TableComponent } from './table.component';
+import { DialogComponent } from './table.component';
 import { AssignmentComponent } from './assignment.component';
 import { NavbarComponent } from './navbar.component';
 import { RegisterComponent } from './register.component';
@@ -85,6 +87,7 @@ var routes = [
     StudentListItemComponent,
     TutorListComponent,
     TutorListItemComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +111,7 @@ var routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     MatExpansionModule,
+    MatDialogModule,
     NgbModule,
     RouterModule.forRoot(routes),
   ],

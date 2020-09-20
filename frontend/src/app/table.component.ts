@@ -1,19 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { TableService } from './table.service';
 import { AuthService } from './auth.service';
-
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 ('rxjs/add/operator/toPromise');
-import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-//import 'rxjs/add/operator/map';
-//import {Observable} from 'rxjs/Rx';
-import { timeout } from 'rxjs/operators';
+
 ('rxjs/Rx');
-import { FormControl } from '@angular/forms';
-import { AssignmentComponent } from './assignment.component';
-import * as moment from 'moment';
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 import {
   animate,
@@ -22,6 +19,11 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'scheduleTable',
@@ -53,6 +55,8 @@ export class TableComponent {
     'todo',
     'save',
   ];
+  animal: string;
+  name: string;
 
   //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
   BASE_URL = 'http://localhost:8080/api';
@@ -60,7 +64,8 @@ export class TableComponent {
   constructor(
     public tableService: TableService,
     public auth: AuthService,
-    private http: Http
+    private http: Http,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -152,5 +157,33 @@ export class TableComponent {
 
   getFromChild(value) {
     console.log(value);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { name: this.name, animal: this.animal },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.animal = result;
+      console.log(result);
+    });
+  }
+}
+
+@Component({
+  selector: 'dialog',
+  templateUrl: './dialog.component.html',
+})
+export class DialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
