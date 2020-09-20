@@ -26,7 +26,8 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 import { TableComponent } from './table.component';
-import { DialogComponent } from './table.component';
+import { DialogComponent } from './dialog.component';
+import { DialogButtonComponent } from './dialog.component';
 import { AssignmentComponent } from './assignment.component';
 import { NavbarComponent } from './navbar.component';
 import { RegisterComponent } from './register.component';
@@ -88,6 +89,7 @@ var routes = [
     TutorListComponent,
     TutorListItemComponent,
     DialogComponent,
+    DialogButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +117,7 @@ var routes = [
     NgbModule,
     RouterModule.forRoot(routes),
   ],
+  entryComponents: [DialogComponent],
   providers: [TableService, AuthService, MatDatepickerModule],
   bootstrap: [AppComponent],
 })
