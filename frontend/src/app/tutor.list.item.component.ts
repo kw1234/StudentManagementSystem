@@ -20,72 +20,21 @@ export class TutorListItemComponent {
   studentList = [];
   myHttp = this.http;
 
-  ngOnInit() {}
-
-  goToWeeklyPlanner() {
-    this.auth.tutorViewPlanner(this.email);
-  }
-
-  delete() {
-    /*const prom = new Promise(function (resolve, reject) {
-      this.http
-        .get(this.BASE_URL + `/tutor/getStudents?email=${this.auth.email}`)
-        .subscribe((response) => {
-          console.log(response.json().studentList);
-          this.studentList = response.json().studentList;
-        });
-    });*/
-    const tutorEmail = this.auth.email;
+  ngOnInit() {
     this.http
-      .get(this.BASE_URL + `/tutor/getStudents?email=${tutorEmail}`)
-      .toPromise()
-      .then(function (result) {
-        const studentList = result.json().studentList;
-        return studentList;
-      })
-      .then((studentList) => studentList.filter(this.dontDelete, this.email))
-      .then(function (result) {
-        console.log(result);
-        const entry = {
-          email: tutorEmail,
-          studentList: result,
-        };
-        console.log(entry);
-        return entry;
-      })
-      .then((entry) => this.updateHelper(entry));
-    /*.then(function (result) {
-        // (**
-        const studentList = result.json().studentList;
-        const entry = {
-          email: tutorEmail,
-          studentList,
-        };
-        this.updateHelper(entry);
-      });*/
+      .get(this.BASE_URL + `/tutor/getStudents?email=${this.email}`)
+      .subscribe((response) => {
+        console.log(response.json().studentList);
+        this.studentList = response.json().studentList;
+      });
   }
 
-  updateHelper(entry) {
-    console.log(entry);
-    this.http.post(this.BASE_URL + '/tutor/updateStudentList', entry).subscribe(
-      (response) => {
-        console.log(response.json());
-        //console.log(response);
-        //this.textStore = [response.json()];
-        //this.textSubject.next(this.textStore);
-        //this.getFileNames();
-        const result = response.json();
-        //this.studentList = result.studentList;
-      },
-      (error) => {
-        console.log(
-          `unable to add student to tutor's studentList with error: ${error}`
-        );
-      }
-    );
-  }
-
-  dontDelete(value) {
-    return value.email !== this;
+  getStudents() {
+    this.http
+      .get(this.BASE_URL + `/tutor/getStudents?email=${this.email}`)
+      .subscribe((response) => {
+        console.log(response.json().studentList);
+        this.studentList = response.json().studentList;
+      });
   }
 }

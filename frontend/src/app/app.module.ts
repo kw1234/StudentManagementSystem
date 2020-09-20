@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -106,6 +107,7 @@ var routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatExpansionModule,
     NgbModule,
     RouterModule.forRoot(routes),
   ],
