@@ -6,6 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { AuthService } from './auth.service';
 import { Http } from '@angular/http';
+import { TableService } from './table.service';
 
 export interface DialogData {
   classList: string[];
@@ -23,15 +24,17 @@ export class DialogButtonComponent {
   @Output() public onDialogClose: EventEmitter<any> = new EventEmitter();
   classList: string[];
   name: string;
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = this.table.baseUrl;
 
   constructor(
     public dialog: MatDialog,
     public auth: AuthService,
-    private http: Http
+    private http: Http,
+    public table: TableService
   ) {}
 
   ngOnInit() {
+    console.log(this.BASE_URL);
     console.log(this.dataSource);
     this.http
       .get(

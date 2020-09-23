@@ -2,15 +2,20 @@ import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'user',
   templateUrl: 'edituser.component.html',
 })
 export class EditUserComponent {
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = this.table.baseUrl;
 
-  constructor(private http: Http, private auth: AuthService) {}
+  constructor(
+    private http: Http,
+    private auth: AuthService,
+    public table: TableService
+  ) {}
 
   model = { firstName: '', lastName: '', email: '' };
 

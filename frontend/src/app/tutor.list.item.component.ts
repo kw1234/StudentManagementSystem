@@ -2,15 +2,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'tutor-list-item',
   templateUrl: 'tutor.list.item.component.html',
 })
 export class TutorListItemComponent {
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = this.table.baseUrl;
 
-  constructor(private http: Http, private auth: AuthService) {}
+  constructor(
+    private http: Http,
+    private auth: AuthService,
+    public table: TableService
+  ) {}
 
   @Input() email: string = '';
   @Input() firstName: string;

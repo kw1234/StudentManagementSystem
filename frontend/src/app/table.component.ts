@@ -13,7 +13,6 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'scheduleTable',
@@ -50,7 +49,7 @@ export class TableComponent {
   name: string;
 
   //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
-  BASE_URL = 'http://localhost:8080/api';
+  BASE_URL = this.tableService.baseUrl;
 
   constructor(
     public tableService: TableService,

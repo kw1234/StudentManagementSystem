@@ -39,10 +39,7 @@
               [(ngModel)]="row.monday.name"
             />
           </mat-form-field>
-          <assignment
-            (sendToParent)="getFromChild($event)"
-            [rowData]="{ index: i, data: row.monday }"
-          ></assignment>
+          <assignment [rowData]="{ index: i, data: row.monday }"></assignment>
         </div>
       </mat-cell>
     </ng-container>
@@ -59,10 +56,7 @@
               [(ngModel)]="row.tuesday.name"
             />
           </mat-form-field>
-          <assignment
-            (sendToParent)="getFromChild($event)"
-            [rowData]="{ data: row.tuesday }"
-          ></assignment>
+          <assignment [rowData]="{ data: row.tuesday }"></assignment>
         </div>
       </mat-cell>
     </ng-container>
@@ -79,10 +73,7 @@
               [(ngModel)]="row.wednesday.name"
             />
           </mat-form-field>
-          <assignment
-            (sendToParent)="getFromChild($event)"
-            [rowData]="{ data: row.wednesday }"
-          ></assignment>
+          <assignment [rowData]="{ data: row.wednesday }"></assignment>
         </div>
       </mat-cell>
     </ng-container>
@@ -99,10 +90,7 @@
               [(ngModel)]="row.thursday.name"
             />
           </mat-form-field>
-          <assignment
-            (sendToParent)="getFromChild($event)"
-            [rowData]="{ data: row.thursday }"
-          ></assignment>
+          <assignment [rowData]="{ data: row.thursday }"></assignment>
         </div>
       </mat-cell>
     </ng-container>
@@ -119,10 +107,7 @@
               [(ngModel)]="row.friday.name"
             />
           </mat-form-field>
-          <assignment
-            (sendToParent)="getFromChild($event)"
-            [rowData]="{ data: row.friday }"
-          ></assignment>
+          <assignment [rowData]="{ data: row.friday }"></assignment>
         </div>
       </mat-cell>
     </ng-container>
