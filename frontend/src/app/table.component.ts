@@ -64,54 +64,49 @@ export class TableComponent {
       this.auth.plannerEmail,
       String(parseInt(this.tableService.getCurrentWeek()) - 1)
     );
-    this.http
-      .get(
-        this.BASE_URL + `/student/getClassList?email=${this.auth.plannerEmail}`
-      )
-      .toPromise()
-      .then(function (result) {
-        const classList = result.json().classList;
-        return classList;
-      })
-      .then((classList) => this.updateDataSourceHelper(classList));
   }
 
   updateDataSourceHelper(classList) {
     console.log(classList);
+    if (!this.dataSource) this.dataSource = [];
     for (let i = 0; i < 8; i++) {
-      this.dataSource.push({
-        class: classList[i],
-        monday: {
-          name: '',
-          type: '',
-          progress: '',
-        },
-        tuesday: {
-          name: '',
-          type: '',
-          progress: '',
-        },
-        wednesday: {
-          name: '',
-          type: '',
-          progress: '',
-        },
-        thursday: {
-          name: '',
-          type: '',
-          progress: '',
-        },
-        friday: {
-          name: '',
-          type: '',
-          progress: '',
-        },
-        letterGrade: '',
-        percentage: '',
-        gradeColor: '',
-        comments: '',
-        todo: '',
-      });
+      if (this.dataSource.length < 8) {
+        this.dataSource.push({
+          class: classList[i],
+          monday: {
+            name: '',
+            type: '',
+            progress: '',
+          },
+          tuesday: {
+            name: '',
+            type: '',
+            progress: '',
+          },
+          wednesday: {
+            name: '',
+            type: '',
+            progress: '',
+          },
+          thursday: {
+            name: '',
+            type: '',
+            progress: '',
+          },
+          friday: {
+            name: '',
+            type: '',
+            progress: '',
+          },
+          letterGrade: '',
+          percentage: '',
+          gradeColor: '',
+          comments: '',
+          todo: '',
+        });
+      } else {
+        this.dataSource[i]['class'] = classList[i];
+      }
     }
   }
 
@@ -144,11 +139,21 @@ export class TableComponent {
       .subscribe(
         (response) => {
           console.log(response);
-          //this.textStore = [response.json()];
-          //this.textSubject.next(this.textStore);
-          //this.getFileNames();
+
           const result = response.json();
           this.dataSource = result.plannerData;
+
+          this.http
+            .get(
+              this.BASE_URL +
+                `/student/getClassList?email=${this.auth.plannerEmail}`
+            )
+            .toPromise()
+            .then(function (result) {
+              const classList = result.json().classList;
+              return classList;
+            })
+            .then((classList) => this.updateDataSourceHelper(classList));
         },
         (error) => {
           console.log(`unable to save data with error: ${error}`);
@@ -174,7 +179,12 @@ export class TableComponent {
       );
   }
 
-  getFromChild(value) {
-    console.log(value);
+  getClassListFromChild(classList) {
+    console.log('received class list from child');
+    console.log(classList);
+    for (let i = 0; i < 8; i++) {
+      this.dataSource[i]['class'] = classList[i];
+    }
+    this.tableInput();
   }
 }

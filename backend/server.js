@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
-const login = require('./services/login');
+const userService = require('./services/userService');
 const weeklyService = require('./services/weeklyService.js');
 const tutorService = require('./services/tutorService.js');
 const adminService = require('./services/adminService.js');
@@ -64,13 +64,13 @@ api.post('/tutor/updateStudentList', tutorService.updateStudentList);
 api.get('/tutor/getStudents', tutorService.getStudents);
 api.post('/admin/updateTutorList', adminService.updateTutorList);
 api.get('/admin/getTutors', adminService.getTutors);
-api.get('/user/me', checkAuthenticated, login.getUserProfile);
-api.post('/user/me', checkAuthenticated, login.editUserProfile);
-api.get('/student/getClassList', login.getStudentClassList);
-api.post('/student/updateClassList', login.editStudentClassList);
+api.get('/user/me', checkAuthenticated, userService.getUserProfile);
+api.post('/user/me', checkAuthenticated, userService.editUserProfile);
+api.get('/student/getClassList', userService.getStudentClassList);
+api.post('/student/updateClassList', userService.editStudentClassList);
 
-auth.post('/login', login.login);
-auth.post('/register', login.register);
+auth.post('/login', userService.login);
+auth.post('/register', userService.register);
 
 function checkAuthenticated(req, res, next) {
   if (!req.header('authorization')) {

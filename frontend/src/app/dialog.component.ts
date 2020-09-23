@@ -9,7 +9,6 @@ import { Http } from '@angular/http';
 
 export interface DialogData {
   classList: string[];
-  name: string;
 }
 
 /**
@@ -41,40 +40,52 @@ export class DialogButtonComponent {
       .toPromise()
       .then(function (result) {
         const classList = result.json().classList;
+        console.log(classList + ' initlist');
         return classList;
       })
-      .then((classList) => console.log(classList));
-    this.classList = [];
-    for (let i = 0; i < 8; i++) {
-      this.classList.push(this.dataSource[i]['class']);
-    }
-    console.log(this.classList);
-    /*this.classList = this.classList
-      ? this.classList
-      : ['', '', '', '', '', '', '', ''];*/
-    this.name = 'laaaa';
+      .then((classes) => (this.classList = classes));
   }
 
   openDialog(): void {
-    console.log(this.name);
+    console.log(this.dataSource);
     console.log(this.classList);
-    for (let i = 0; i < 8; i++) {
-      this.classList[i] = this.dataSource[i]['class'];
-    }
+    this.http
+      .get(
+        this.BASE_URL + `/student/getClassList?email=${this.auth.plannerEmail}`
+      )
+      .toPromise()
+      .then(function (result) {
+        const classList = result.json().classList;
+        return classList;
+      })
+      .then((classes) => (this.classList = classes));
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { name: this.name, classList: this.classList },
+      data: { classList: this.classList },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       console.log('The dialog was closed');
       this.classList = result ? result : this.classList;
-      for (let i = 0; i < 8; i++) {
-        this.dataSource[i]['class'] = this.classList[i];
-      }
-      console.log(this.dataSource);
+      this.onDialogClose.emit(this.classList);
+      const entry = {
+        email: this.auth.plannerEmail,
+        classList: this.classList,
+      };
+      console.log(this.classList + ' BOLO');
+      this.http
+        .post(this.BASE_URL + `/student/updateClassList`, entry)
+        .toPromise()
+        .then(() => this.updateClassListHelper(this.classList));
     });
+  }
+
+  updateClassListHelper(classes) {
+    for (let i = 0; i < 8; i++) {
+      this.dataSource[i]['class'] = classes[i];
+    }
+    console.log(this.dataSource);
   }
 }
 

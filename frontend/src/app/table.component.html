@@ -2,7 +2,7 @@
   <paginator></paginator>
   <span style="flex: 1 1 auto"></span>
   <dialog-button
-    (sendToParent)="getFromChild($event)"
+    (onDialogClose)="getClassListFromChild($event)"
     [dataSource]="dataSource"
   ></dialog-button>
 </div>
