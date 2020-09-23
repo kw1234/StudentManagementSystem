@@ -4,6 +4,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { AuthService } from './auth.service';
+import { Http } from '@angular/http';
 
 export interface DialogData {
   classList: string[];
@@ -22,11 +24,26 @@ export class DialogButtonComponent {
   @Output() public onDialogClose: EventEmitter<any> = new EventEmitter();
   classList: string[];
   name: string;
+  BASE_URL = 'http://localhost:8080/api';
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    public auth: AuthService,
+    private http: Http
+  ) {}
 
   ngOnInit() {
     console.log(this.dataSource);
+    this.http
+      .get(
+        this.BASE_URL + `/student/getClassList?email=${this.auth.plannerEmail}`
+      )
+      .toPromise()
+      .then(function (result) {
+        const classList = result.json().classList;
+        return classList;
+      })
+      .then((classList) => console.log(classList));
     this.classList = [];
     for (let i = 0; i < 8; i++) {
       this.classList.push(this.dataSource[i]['class']);

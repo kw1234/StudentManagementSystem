@@ -13,6 +13,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'scheduleTable',
@@ -31,6 +32,7 @@ import {
 })
 export class TableComponent {
   dataSource = [];
+  classList = [];
   colNames = [
     'class',
     'monday',
@@ -62,9 +64,23 @@ export class TableComponent {
       this.auth.plannerEmail,
       String(parseInt(this.tableService.getCurrentWeek()) - 1)
     );
+    this.http
+      .get(
+        this.BASE_URL + `/student/getClassList?email=${this.auth.plannerEmail}`
+      )
+      .toPromise()
+      .then(function (result) {
+        const classList = result.json().classList;
+        return classList;
+      })
+      .then((classList) => this.updateDataSourceHelper(classList));
+  }
+
+  updateDataSourceHelper(classList) {
+    console.log(classList);
     for (let i = 0; i < 8; i++) {
       this.dataSource.push({
-        class: '',
+        class: classList[i],
         monday: {
           name: '',
           type: '',
@@ -136,6 +152,24 @@ export class TableComponent {
         },
         (error) => {
           console.log(`unable to save data with error: ${error}`);
+        }
+      );
+  }
+
+  getStudentClassList(email) {
+    this.http
+      .get(this.BASE_URL + `/student/classList?email=${email}`)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          //this.textStore = [response.json()];
+          //this.textSubject.next(this.textStore);
+          //this.getFileNames();
+          const result = response.json();
+          this.classList = result.classList;
+        },
+        (error) => {
+          console.log(`unable to get class list data with error: ${error}`);
         }
       );
   }

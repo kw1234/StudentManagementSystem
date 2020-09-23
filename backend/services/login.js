@@ -23,6 +23,8 @@ exports.register = async function (req, res) {
       user.tutorList = [];
     } else if (role === 'tutor') {
       user.studentList = [];
+    } else if (role === 'student') {
+      user.classList = [];
     }
     postUser(res, req.app.client, user).catch((error) => {
       res.status(400).end(`Error in the register request: ${error.message}`);
@@ -80,6 +82,29 @@ exports.getUserProfile = async function (req, res) {
   }
 };
 
+exports.getStudentClassList = async function (req, res) {
+  const query = req.query;
+  const email = query.email;
+
+  const classList = await getClassList(req.app.client, email).catch((error) => {
+    res.status(400).end(`Error in the get student classList request: ${error.message}`);
+  });
+
+  res.send({ classList: classList });
+};
+
+exports.editStudentClassList = async function (req, res) {
+  const email = req.body.email;
+  const user = {
+    classList: req.body.classList,
+  };
+
+  await editClassList(req.app.client, { email }, user).catch((error) => {
+    res.status(400).end(`Error in the edit student classList request: ${error.message}`);
+  });
+  res.status(200);
+};
+
 async function postUser(res, client, user) {
   const result = await client.db('StudentSystem').collection('Users').insertOne(user);
   console.log(`New user created with the following id: ${result.insertedId}`);
@@ -95,6 +120,18 @@ async function editUser(client, key, val) {
   console.log(key, val.firstName, val.lastName, val.role);
   await client.db('StudentSystem').collection('Users').update(key, { $set: val });
   console.log(`User ${key.email} was edited`);
+}
+
+async function getClassList(client, email) {
+  const result = await client.db('StudentSystem').collection('Users').findOne({ email });
+  if (result) return result.classList;
+  return result;
+}
+
+async function editClassList(client, key, val) {
+  console.log(key, val.classList);
+  await client.db('StudentSystem').collection('Users').update(key, { $set: val });
+  console.log(`User ${key.email}'s classList was edited`);
 }
 
 function sendToken(res, user) {

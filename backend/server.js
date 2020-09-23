@@ -66,6 +66,8 @@ api.post('/admin/updateTutorList', adminService.updateTutorList);
 api.get('/admin/getTutors', adminService.getTutors);
 api.get('/user/me', checkAuthenticated, login.getUserProfile);
 api.post('/user/me', checkAuthenticated, login.editUserProfile);
+api.get('/student/getClassList', login.getStudentClassList);
+api.post('/student/updateClassList', login.editStudentClassList);
 
 auth.post('/login', login.login);
 auth.post('/register', login.register);
