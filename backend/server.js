@@ -5,6 +5,7 @@ const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
 const userService = require('./services/userService');
 const weeklyService = require('./services/weeklyService.js');
+const statusReport = require('./services/statusReportService.js');
 const tutorService = require('./services/tutorService.js');
 const adminService = require('./services/adminService.js');
 
@@ -60,14 +61,18 @@ const auth = express.Router();
 
 api.post('/postData', weeklyService.postData);
 api.get('/getData', weeklyService.getData);
+api.post('/statusReport/postData', statusReport.postData);
+api.get('/statusReport/getData', statusReport.getData);
+
 api.post('/tutor/updateStudentList', tutorService.updateStudentList);
 api.get('/tutor/getStudents', tutorService.getStudents);
 api.post('/admin/updateTutorList', adminService.updateTutorList);
 api.get('/admin/getTutors', adminService.getTutors);
-api.get('/user/me', checkAuthenticated, userService.getUserProfile);
-api.post('/user/me', checkAuthenticated, userService.editUserProfile);
 api.get('/student/getClassList', userService.getStudentClassList);
 api.post('/student/updateClassList', userService.editStudentClassList);
+
+api.get('/user/me', checkAuthenticated, userService.getUserProfile);
+api.post('/user/me', checkAuthenticated, userService.editUserProfile);
 
 auth.post('/login', userService.login);
 auth.post('/register', userService.register);

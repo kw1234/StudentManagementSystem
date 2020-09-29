@@ -26,6 +26,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 import { TableComponent } from './table.component';
+import { StatusReportComponent } from './status.report.component';
 import { DialogComponent } from './dialog.component';
 import { DialogButtonComponent } from './dialog.component';
 import { AssignmentComponent } from './assignment.component';
@@ -53,6 +54,10 @@ var routes = [
     component: TableComponent,
   },
   {
+    path: 'statusReport',
+    component: StatusReportComponent,
+  },
+  {
     path: 'register',
     component: RegisterComponent,
   },
@@ -78,6 +83,7 @@ var routes = [
   declarations: [
     AppComponent,
     TableComponent,
+    StatusReportComponent,
     AssignmentComponent,
     NavbarComponent,
     RegisterComponent,
