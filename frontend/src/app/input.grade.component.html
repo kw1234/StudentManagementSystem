@@ -1,0 +1,27 @@
+<h1 style="text-align: center">Input Assignment Grades</h1>
+
+<mat-form-field appearance="fill">
+  <mat-label>Class (ng for of the class names)</mat-label>
+  <mat-select> </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Assignment Name" />
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Assignment Type</mat-label>
+  <mat-select>
+    <mat-option value="hw">HW</mat-option>
+    <mat-option value="test">Quiz</mat-option>
+    <mat-option value="quiz">Test</mat-option>
+    <mat-option value="project">Project</mat-option>
+    <mat-option value="essay">Essay</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Points Received" />
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Total Points" />
+</mat-form-field>
+<button mat-raised-button color="primary">Submit</button>
