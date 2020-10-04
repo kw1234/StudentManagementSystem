@@ -39,6 +39,7 @@ import { StudentListComponent } from './student.list.component';
 import { StudentListItemComponent } from './student.list.item.component';
 import { TutorListComponent } from './tutor.list.component';
 import { TutorListItemComponent } from './tutor.list.item.component';
+import { InputGradeComponent } from './input.grade.component';
 
 import { TableService } from './table.service';
 import { AuthService } from './auth.service';
@@ -77,6 +78,10 @@ var routes = [
     path: 'tutorList',
     component: TutorListComponent,
   },
+  {
+    path: 'inputGrades',
+    component: InputGradeComponent,
+  },
 ];
 
 @NgModule({
@@ -96,6 +101,7 @@ var routes = [
     TutorListItemComponent,
     DialogComponent,
     DialogButtonComponent,
+    InputGradeComponent,
   ],
   imports: [
     BrowserModule,
