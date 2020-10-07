@@ -32,21 +32,6 @@ import {
 export class InputGradeComponent {
   dataSource = [];
   classList = [];
-  colNames = [
-    'class',
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'letterGrade',
-    'percentage',
-    'comments',
-    'todo',
-    'save',
-  ];
-  animal: string;
-  name: string;
 
   //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
   BASE_URL = this.tableService.baseUrl;
@@ -166,9 +151,6 @@ export class InputGradeComponent {
       .subscribe(
         (response) => {
           console.log(response);
-          //this.textStore = [response.json()];
-          //this.textSubject.next(this.textStore);
-          //this.getFileNames();
           const result = response.json();
           this.classList = result.classList;
         },
