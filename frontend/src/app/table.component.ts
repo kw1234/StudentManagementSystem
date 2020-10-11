@@ -65,8 +65,56 @@ export class TableComponent {
     );
   }
 
+  getTableData(email, weekId) {
+    this.http
+      .get(this.BASE_URL + `/getData?email=${email}&weekId=${weekId}`)
+      .subscribe(
+        (response) => {
+          console.log(response);
+
+          const result = response.json();
+          this.dataSource = result.plannerData;
+
+          this.http
+            .get(
+              this.BASE_URL +
+                `/student/getClassList?email=${this.auth.plannerEmail}`
+            )
+            .toPromise()
+            .then(function (result) {
+              const classList = result.json().classList;
+              return classList;
+            })
+            .then((classList) => this.updateDataSourceHelper(classList));
+        },
+        (error) => {
+          console.log(`unable to save data with error: ${error}`);
+        }
+      );
+  }
+
+  getStudentClassList(email) {
+    this.http
+      .get(this.BASE_URL + `/student/classList?email=${email}`)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          //this.textStore = [response.json()];
+          //this.textSubject.next(this.textStore);
+          //this.getFileNames();
+          const result = response.json();
+          this.classList = result.classList;
+          console.log(this.classList);
+        },
+        (error) => {
+          console.log(`unable to get class list data with error: ${error}`);
+        }
+      );
+  }
+
   updateDataSourceHelper(classList) {
     console.log(classList);
+    this.classList = classList;
     if (!this.dataSource) this.dataSource = [];
     for (let i = 0; i < 8; i++) {
       if (this.dataSource.length < 8) {
@@ -109,8 +157,6 @@ export class TableComponent {
     }
   }
 
-  saveData(data) {}
-
   tableInput() {
     const entry = {
       rows: this.dataSource,
@@ -130,52 +176,6 @@ export class TableComponent {
         console.log(`unable to save data with error: ${error}`);
       }
     );
-  }
-
-  getTableData(email, weekId) {
-    this.http
-      .get(this.BASE_URL + `/getData?email=${email}&weekId=${weekId}`)
-      .subscribe(
-        (response) => {
-          console.log(response);
-
-          const result = response.json();
-          this.dataSource = result.plannerData;
-
-          this.http
-            .get(
-              this.BASE_URL +
-                `/student/getClassList?email=${this.auth.plannerEmail}`
-            )
-            .toPromise()
-            .then(function (result) {
-              const classList = result.json().classList;
-              return classList;
-            })
-            .then((classList) => this.updateDataSourceHelper(classList));
-        },
-        (error) => {
-          console.log(`unable to save data with error: ${error}`);
-        }
-      );
-  }
-
-  getStudentClassList(email) {
-    this.http
-      .get(this.BASE_URL + `/student/classList?email=${email}`)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          //this.textStore = [response.json()];
-          //this.textSubject.next(this.textStore);
-          //this.getFileNames();
-          const result = response.json();
-          this.classList = result.classList;
-        },
-        (error) => {
-          console.log(`unable to get class list data with error: ${error}`);
-        }
-      );
   }
 
   getClassListFromChild(classList) {

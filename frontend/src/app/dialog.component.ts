@@ -111,4 +111,8 @@ export class DialogComponent {
     this.data.classList = this.data.classList;
     //this.dialogRef.close();
   }
+
+  trackByFn(index: any, item: any) {
+    return index;
+  }
 }
