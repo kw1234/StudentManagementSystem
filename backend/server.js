@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
 const userService = require('./services/userService');
@@ -21,11 +22,6 @@ const uri = `mongodb+srv://${process.env.username}:${process.env.password}@clust
 
 app.use(bodyParser.json());
 
-const router = express.Router();
-router.get('/', function (req, res, next) {
-  next();
-});
-
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -40,7 +36,6 @@ client.connect(function (err, database) {
   console.log('Listening on port 8080');
 });
 
-app.use('/', router);
 app.use(express.static('frontend'));
 
 app.use((req, res, next) => {
@@ -94,3 +89,6 @@ function checkAuthenticated(req, res, next) {
 
 app.use('/api', api);
 app.use('/auth', auth);
+app.use(function (req, res) {
+  res.sendFile(path.join(__dirname, '/frontend', 'index.html'));
+});

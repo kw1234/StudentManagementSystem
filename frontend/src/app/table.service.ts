@@ -18,8 +18,8 @@ export class TableService {
 
   constructor(private http: Http) {}
 
-  //public BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
-  public BASE_URL = 'http://localhost:8080/api';
+  public BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
+  //public BASE_URL = 'http://localhost:8080/api';
 
   loading = false;
 

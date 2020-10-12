@@ -8,7 +8,9 @@
 <mat-form-field>
   <input matInput placeholder="Last Name" [(ngModel)]="lastName" />
 </mat-form-field>
-<button (click)="addStudent()">Add Student</button>
+<button mat-raised-button color="primary" (click)="addStudent()">
+  Add Student
+</button>
 <student-list-item
   *ngFor="let student of studentList; index as i"
   [email]="studentList[i].email"
