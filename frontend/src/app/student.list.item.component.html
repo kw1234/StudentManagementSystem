@@ -3,7 +3,11 @@
   {{ firstName }} {{ lastName }}
   <strong>Email:</strong>
   {{ email }}
-  <button (click)="goToWeeklyPlanner()">Weekly Planner</button>
-  <button (click)="goToWeeklyPlanner()">Progress Report</button>
-  <button (click)="delete()">delete</button>
+  <button mat-raised-button color="primary" (click)="goToWeeklyPlanner()">
+    Weekly Planner
+  </button>
+  <button mat-raised-button color="primary" (click)="goToWeeklyPlanner()">
+    Progress Report
+  </button>
+  <button mat-raised-button color="warn" (click)="delete()">delete</button>
 </mat-card>

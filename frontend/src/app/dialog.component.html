@@ -1,6 +1,8 @@
 <h1 mat-dialog-title>Edit Class Names</h1>
 <div mat-dialog-content>
-  <mat-form-field *ngFor="let class of data.classList; index as i">
+  <mat-form-field
+    *ngFor="let class of data.classList; index as i; trackBy: trackByFn"
+  >
     <mat-label>Class {{ i + 1 }}</mat-label>
     <input matInput [(ngModel)]="data.classList[i]" />
   </mat-form-field>
