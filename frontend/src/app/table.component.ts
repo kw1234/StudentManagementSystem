@@ -48,7 +48,6 @@ export class TableComponent {
   animal: string;
   name: string;
 
-  //BASE_URL = 'https://studentsystem-288207.uc.r.appspot.com/api';
   BASE_URL = this.tableService.baseUrl;
 
   constructor(
@@ -99,9 +98,6 @@ export class TableComponent {
       .subscribe(
         (response) => {
           console.log(response);
-          //this.textStore = [response.json()];
-          //this.textSubject.next(this.textStore);
-          //this.getFileNames();
           const result = response.json();
           this.classList = result.classList;
           console.log(this.classList);
@@ -165,10 +161,6 @@ export class TableComponent {
     };
     this.http.post(this.BASE_URL + '/postData', entry).subscribe(
       (response) => {
-        //console.log(response);
-        //this.textStore = [response.json()];
-        //this.textSubject.next(this.textStore);
-        //this.getFileNames();
         const result = response.json();
         this.dataSource = result.plannerData;
       },

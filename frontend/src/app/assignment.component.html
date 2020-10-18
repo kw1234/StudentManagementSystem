@@ -1,21 +1,21 @@
 <div>
-  <div class="typeAndProgress">
+  <div>
     <mat-form-field appearance="fill" class="typeAndProgress">
-      <mat-label>Type</mat-label>
+      <mat-label><mat-icon aria-hidden="false">assignment</mat-icon></mat-label>
       <mat-select
         panelClass="panel-{{ rowData.data.type }}"
         (ngModelChange)="onChange($event)"
         [(ngModel)]="rowData.data.type"
       >
-        <mat-option style="color: blue;" value="hw">HW</mat-option>
-        <mat-option style="color: red;" value="test">Test</mat-option>
-        <mat-option style="color: rgb(78, 128, 103);" value="quiz"
+        <mat-option style="color: blue" value="hw">HW</mat-option>
+        <mat-option style="color: red" value="test">Test</mat-option>
+        <mat-option style="color: rgb(78, 128, 103)" value="quiz"
           >Quiz</mat-option
         >
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="typeAndProgress">
+  <div>
     <mat-form-field appearance="fill" class="typeAndProgress">
       <mat-label
         ><mat-icon aria-hidden="false">access_time</mat-icon></mat-label

@@ -4,7 +4,7 @@
 }
 
 .mat-cell {
-  padding: 16px 0px 16px 8px;
+  padding: 0px 0px 0px 8px;
 }
 
 .mat-form-field {
@@ -22,9 +22,9 @@ table {
 
 .typeAndProgress {
   font-size: 12px;
-  display: inline-block;
-  width: 70px;
-  padding: 2px;
+  max-width: 35%;
+  float: left;
+  padding: 0px 0px 0px 2px;
 }
 
 section {
