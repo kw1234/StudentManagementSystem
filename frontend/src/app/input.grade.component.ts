@@ -17,7 +17,7 @@ import {
 @Component({
   selector: 'input-grades',
   templateUrl: './input.grade.component.html',
-  styleUrls: ['table.css'],
+  styleUrls: ['input.grade.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
