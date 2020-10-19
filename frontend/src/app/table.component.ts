@@ -39,8 +39,6 @@ export class TableComponent {
     'wednesday',
     'thursday',
     'friday',
-    'letterGrade',
-    'percentage',
     'comments',
     'todo',
     'save',

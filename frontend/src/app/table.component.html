@@ -124,20 +124,6 @@
       </div>
     </ng-container>
 
-    <ng-container matColumnDef="percentage">
-      <mat-header-cell *matHeaderCellDef> Percentage </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <input
-            matInput
-            name="percentage"
-            placeholder="Grade Percentage"
-            [(ngModel)]="row.percentage"
-          />
-        </mat-form-field>
-      </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="comments">
       <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
       <mat-cell *matCellDef="let row">
