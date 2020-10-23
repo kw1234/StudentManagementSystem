@@ -41,7 +41,6 @@ export class TableComponent {
     'friday',
     'comments',
     'todo',
-    'save',
   ];
   animal: string;
   name: string;
