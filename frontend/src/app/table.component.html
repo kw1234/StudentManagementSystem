@@ -112,29 +112,17 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="letterGrade">
-      <mat-header-cell *matHeaderCellDef> Letter Grade </mat-header-cell>
-      <div>
-        <mat-cell
-          *matCellDef="let row"
-          style="background-color:{{ row.gradeColor }}"
-        >
-          {{ row.letterGrade }}
-        </mat-cell>
-      </div>
-    </ng-container>
-
     <ng-container matColumnDef="comments">
       <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <mat-label>Comments</mat-label>
           <textarea
             matInput
             name="comments"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="1"
+            cdkAutosizeMinRows="3"
             cdkAutosizeMaxRows="10"
             [(ngModel)]="row.comments"
           ></textarea>
@@ -145,14 +133,14 @@
     <ng-container matColumnDef="todo">
       <mat-header-cell *matHeaderCellDef> To Do </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <mat-label>To Do</mat-label>
           <textarea
             matInput
             name="todo"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="1"
+            cdkAutosizeMinRows="3"
             cdkAutosizeMaxRows="10"
             [(ngModel)]="row.todo"
           ></textarea>
