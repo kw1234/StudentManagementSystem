@@ -3,14 +3,25 @@
     <mat-form-field appearance="fill" class="typeSelect">
       <mat-label><mat-icon aria-hidden="false">assignment</mat-icon></mat-label>
       <mat-select
-        panelClass="panel-{{ rowData.data.type }}"
         (ngModelChange)="onChange($event)"
         [(ngModel)]="rowData.data.type"
       >
-        <mat-option style="color: blue" value="hw">HW</mat-option>
-        <mat-option style="color: red" value="test">Test</mat-option>
-        <mat-option style="color: rgb(78, 128, 103)" value="quiz"
-          >Quiz</mat-option
+        <mat-select-trigger>
+          <mat-icon [inline]="true" aria-hidden="false">{{
+            rowData.data.type
+          }}</mat-icon></mat-select-trigger
+        >
+        <mat-option value="article">
+          <mat-icon aria-hidden="false">article</mat-icon>
+          HW</mat-option
+        >
+        <mat-option value="book">
+          <mat-icon aria-hidden="false">book</mat-icon>
+          Quiz</mat-option
+        >
+        <mat-option value="fact_check">
+          <mat-icon aria-hidden="false">fact_check</mat-icon>
+          Test</mat-option
         >
       </mat-select>
     </mat-form-field>
@@ -43,5 +54,10 @@
         >
       </mat-select>
     </mat-form-field>
+  </div>
+  <div>
+    <button mat-icon-button color="primary" aria-label="">
+      <mat-icon>grading</mat-icon>
+    </button>
   </div>
 </div>

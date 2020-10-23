@@ -22,12 +22,19 @@ table {
 
 .typeSelect {
   font-size: 12px;
-  max-width: 32%;
+  max-width: 25%;
   float: left;
   padding: 0px 0px 0px 2px;
 }
 
 .progressSelect {
+  font-size: 12px;
+  max-width: 25%;
+  float: left;
+  padding: 0px 0px 0px 2px;
+}
+
+.gradeShortcut {
   font-size: 12px;
   max-width: 25%;
   padding: 0px 0px 0px 2px;
